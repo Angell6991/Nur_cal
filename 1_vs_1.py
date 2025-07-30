@@ -17,31 +17,29 @@ select_grup_01  =   inp.select(
                         choices=name_sheet_list
                     ).execute()
 
+tabla_01        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_01))
+list_players_01 =   tabla_01.columns.to_numpy()
+list_players_01 =   list_players_01[1:]
+
+###----------------------Select_player_01--------------------------###
+name_player_01  =   inp.select(
+                        message="seletc player: ",
+                        choices=list_players_01
+                    ).execute()
+
 ###-----------------------Select_grup_02---------------------------###
 select_grup_02  =   inp.select(
                         message="seletc grup 2: ",
                         choices=name_sheet_list
                     ).execute()
 
-###----------------------Import_data_list--------------------------###
-tabla_01        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_01))
 tabla_02        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_02))
-
-list_players_01 =   tabla_01.columns.to_numpy()
-list_players_01 =   list_players_01[1:]
-
 list_players_02 =   tabla_02.columns.to_numpy()
 list_players_02 =   list_players_02[1:]
 
-###----------------------Select_player_01--------------------------###
-name_player_01  =   inp.select(
-                        message="seletc player 1: ",
-                        choices=list_players_01
-                    ).execute()
-
-###----------------------Select_player_01--------------------------###
+###----------------------Select_player_02--------------------------###
 name_player_02  =   inp.select(
-                        message="seletc player 2: ",
+                        message="seletc player: ",
                         choices=list_players_02
                     ).execute()
 
