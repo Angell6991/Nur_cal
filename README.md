@@ -5,5 +5,5 @@ which is currently under development.
 
 Install dependencies:
 ```sh
-pip install pandas numpy openpyxl
+pip install pandas numpy openpyxl inquirerpy
 ```

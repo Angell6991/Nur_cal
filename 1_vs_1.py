@@ -1,27 +1,55 @@
 import  modules.probability as  pb  
 import  modules.graph   as  plt
+
+import  InquirerPy.inquirer as  inp
 import  pandas  as  pd
 import  numpy   as  np
+import  os 
 
+os.system("clear")
 
-###------------------------Def_name_data---------------------------###
-
-name_player_01  =   "carlos"
-name_player_02  =   "amanda"
 name_table_data =   "list_grups.xlsx"
-name_sheet      =   "grup lunes"    
+name_sheet_list =   pd.ExcelFile(str(name_table_data)).sheet_names
+
+###-----------------------Select_grup_01---------------------------###
+select_grup_01  =   inp.select(
+                        message="seletc grup 1: ",
+                        choices=name_sheet_list
+                    ).execute()
+
+###-----------------------Select_grup_02---------------------------###
+select_grup_02  =   inp.select(
+                        message="seletc grup 2: ",
+                        choices=name_sheet_list
+                    ).execute()
 
 ###----------------------Import_data_list--------------------------###
+tabla_01        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_01))
+tabla_02        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_02))
 
-# name_sheet_list = pd.ExcelFile(str(name_table_data)).sheet_names
+list_players_01 =   tabla_01.columns.to_numpy()
+list_players_01 =   list_players_01[1:]
 
-tabla       =   pd.read_excel(str(name_table_data), sheet_name=str(name_sheet))
-player_01   =   np.array(tabla[f"{name_player_01}"])
-player_02   =   np.array(tabla[f"{name_player_02}"])
+list_players_02 =   tabla_02.columns.to_numpy()
+list_players_02 =   list_players_02[1:]
+
+###----------------------Select_player_01--------------------------###
+name_player_01  =   inp.select(
+                        message="seletc player 1: ",
+                        choices=list_players_01
+                    ).execute()
+
+###----------------------Select_player_01--------------------------###
+name_player_02  =   inp.select(
+                        message="seletc player 2: ",
+                        choices=list_players_02
+                    ).execute()
+
+###--------------------------Init_cal------------------------------###
+player_01   =   np.array(tabla_01[f"{name_player_01}"])
+player_02   =   np.array(tabla_02[f"{name_player_02}"])
 
 prob    =   pb.probability(player_01, player_02)
-
-print(tabla)
 
 plt.plot( 
      name_player_01, name_player_02,
@@ -31,7 +59,5 @@ plt.plot(
      prob.list_unique_1, prob.list_unique_2,
      prob.list_probability_die_1, prob.list_probability_die_2
 )
-
-
 
 
