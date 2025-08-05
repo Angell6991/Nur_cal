@@ -5,5 +5,5 @@ which is currently under development.
 
 Install dependencies:
 ```sh
-pip install pandas numpy inquirerpy
+pip install pandas numpy inquirerpy tabulate
 ```
