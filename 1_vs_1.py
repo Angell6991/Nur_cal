@@ -19,7 +19,7 @@ while   selection   !=  "back":
     selection   =   inp.select(
                             message="Select an action: ",
                             choices=list_option
-                        ).execute()
+                    ).execute()
     
     if  selection   !=  "back":
         os.system("clear")

@@ -4,7 +4,7 @@ import  os
 ############################################################
 ###-------------------New_list_data----------------------###
 ############################################################
-def new_list(name_list, name_players, data_list):
+def new_list(dir, name_list, name_players, data_list):
     
     ###----------Created_directory_and_add_data--------------###
     directory   =   {}
@@ -22,7 +22,7 @@ def new_list(name_list, name_players, data_list):
     tabla["Promedio"]   =   tabla['Promedio'].round().astype(int)
 
     ###-------------------Guardar_tabla----------------------###
-    tabla.to_csv(f"list/{name_list}.dat", sep=' ', index=True)
+    tabla.to_csv(f"{dir}/{name_list}.dat", sep=' ', index=True)
 
     return  tabla
 
@@ -30,17 +30,17 @@ def new_list(name_list, name_players, data_list):
 ############################################################
 ###-----------------Remove_list_data---------------------###
 ############################################################
-def remove_list(name_list):
-    return  os.remove(f"list/{name_list}.dat")
+def remove_list(dir, name_list):
+    return  os.remove(f"{dir}/{name_list}.dat")
 
 
 ############################################################
 ###-----------------Edit_one_atribut---------------------###
 ############################################################
-def edit_player(name_list, name_player, atribut, value):
+def edit_player(dir, name_list, name_player, atribut, value):
 
     ###------------------Import_data_list--------------------###
-    tabla   =   pd.read_csv(f"list/{name_list}.dat", sep=r"\s+").set_index("Player")
+    tabla   =   pd.read_csv(f"{dir}/{name_list}.dat", sep=r"\s+").set_index("Player")
     
     ###---------------Eliminar_colum_promedio----------------###
     tabla.drop(columns=["Promedio"], inplace=True)
@@ -53,7 +53,7 @@ def edit_player(name_list, name_player, atribut, value):
     tabla["Promedio"]   =   tabla['Promedio'].round().astype(int)
 
     ###-------------------Guardar_tabla----------------------###
-    tabla.to_csv(f"list/{name_list}.dat", sep=' ', index=True)
+    tabla.to_csv(f"{dir}/{name_list}.dat", sep=' ', index=True)
 
     return  tabla
 
@@ -61,10 +61,10 @@ def edit_player(name_list, name_player, atribut, value):
 ############################################################
 ###-------------------Agregar_player---------------------###
 ############################################################
-def add_player(name_list, name_player, list_data):
+def add_player(dir, name_list, name_player, list_data):
 
     ###------------------Import_data_list--------------------###
-    tabla   =   pd.read_csv(f"list/{name_list}.dat", sep=r"\s+").set_index("Player")
+    tabla   =   pd.read_csv(f"{dir}/{name_list}.dat", sep=r"\s+").set_index("Player")
     
     ###---------------Eliminar_colum_promedio----------------###
     tabla.drop(columns=["Promedio"], inplace=True)
@@ -77,7 +77,7 @@ def add_player(name_list, name_player, list_data):
     tabla["Promedio"]   =   tabla['Promedio'].round().astype(int)
 
     ###-------------------Guardar_tabla----------------------###
-    tabla.to_csv(f"list/{name_list}.dat", sep=' ', index=True)
+    tabla.to_csv(f"{dir}/{name_list}.dat", sep=' ', index=True)
     
     return  tabla
 
@@ -85,10 +85,10 @@ def add_player(name_list, name_player, list_data):
 ############################################################
 ###-------------------Eliminar_player--------------------###
 ############################################################
-def remove_player(name_list, name_player):
+def remove_player(dir, name_list, name_player):
 
     ###------------------Import_data_list--------------------###
-    tabla   =   pd.read_csv(f"list/{name_list}.dat", sep=r"\s+").set_index("Player")
+    tabla   =   pd.read_csv(f"{dir}/{name_list}.dat", sep=r"\s+").set_index("Player")
     
     ###----------Eliminar_colum_promedio_and_player----------###
     tabla.drop(columns=["Promedio"], inplace=True)
@@ -99,7 +99,7 @@ def remove_player(name_list, name_player):
     tabla["Promedio"]   =   tabla['Promedio'].round().astype(int)
 
     ###-------------------Guardar_tabla----------------------###
-    tabla.to_csv(f"list/{name_list}.dat", sep=' ', index=True)
+    tabla.to_csv(f"{dir}/{name_list}.dat", sep=' ', index=True)
     
     return  tabla
 
@@ -107,10 +107,11 @@ def remove_player(name_list, name_player):
 ############################################################
 ###-------------------Texting_pogram---------------------###
 ############################################################
-# new_list("prueva", ["carlos", "sandra"], [[1,2,3,4,5], [5,4,3,2,1]])
-# add_player("grup_02", "sara", [2,2,2,2,2])
-# edit_player("grup_02", "sara", "Life", 200)
-# remove_player("grup_02", "luis")
-# remove_list("grup_02")
+# directory =   "list"
+# new_list(directory, "prueva", ["carlos", "sandra"], [[1,2,3,4,5], [5,4,3,2,1]])
+# add_player(directory, "grup_02", "sara", [2,2,2,2,2])
+# edit_player(directory, "grup_02", "sara", "Life", 200)
+# remove_player(directory, "grup_02", "luis")
+# remove_list(directory, "grup_02")
 
 
