@@ -7,64 +7,112 @@ import  numpy   as  np
 import  os 
 
 os.system("clear")
-
-name_table_data =   "list_grups.xlsx"
-name_sheet_list =   pd.ExcelFile(str(name_table_data)).sheet_names
-
-
 ######################################################################
-###-----------------------Select_grup_01---------------------------###
+###---------------------Init_loop_while----------------------------###
 ######################################################################
-select_grup_01  =   inp.select(
-                        message="seletc grup 1: ",
-                        choices=name_sheet_list
-                    ).execute()
+list_option =   ["Calculate 1 vs 1", "back"]
+selection   =   "empty"
 
-tabla_01        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_01))
-list_players_01 =   tabla_01.columns.to_numpy()
-list_players_01 =   list_players_01[1:]
+while   selection   !=  "back":
+    
+    ###---------------Selection_for_back_1_vs_1------------------------###
+    selection   =   inp.select(
+                            message="Select an action: ",
+                            choices=list_option
+                        ).execute()
+    
+    if  selection   !=  "back":
+        os.system("clear")
 
-###----------------------Select_player_01--------------------------###
-name_player_01  =   inp.select(
-                        message="seletc player: ",
-                        choices=list_players_01
-                    ).execute()
-
-
-######################################################################
-###-----------------------Select_grup_02---------------------------###
-######################################################################
-select_grup_02  =   inp.select(
-                        message="seletc grup 2: ",
-                        choices=name_sheet_list
-                    ).execute()
-
-tabla_02        =   pd.read_excel(str(name_table_data), sheet_name=str(select_grup_02))
-list_players_02 =   tabla_02.columns.to_numpy()
-list_players_02 =   list_players_02[1:]
-
-###----------------------Select_player_02--------------------------###
-name_player_02  =   inp.select(
-                        message="seletc player: ",
-                        choices=list_players_02
-                    ).execute()
+        ######################################################################
+        ###---------------------Import_grup_data---------------------------###
+        ######################################################################
+        list_directoriy = os.listdir("modules/list/")
+        list_directoriy = [filename.replace(".dat", "") for filename in list_directoriy]
 
 
-######################################################################
-###--------------------------Init_cal------------------------------###
-######################################################################
-player_01   =   np.array(tabla_01[f"{name_player_01}"])
-player_02   =   np.array(tabla_02[f"{name_player_02}"])
+        ######################################################################
+        ###-----------------------Select_grup_01---------------------------###
+        ######################################################################
+        select_grup_01  =   inp.select(
+                                message="select grup 1: ",
+                                choices=list_directoriy
+                            ).execute()
 
-prob    =   pb.probability(player_01, player_02)
+        tabla_01        =   pd.read_csv(f"modules/list/{select_grup_01}.dat", sep=r"\s+").set_index("Player")
 
-plt.plot( 
-     name_player_01, name_player_02,
-     prob.probability_kill_1, prob.probability_kill_2,
-     prob.probability_attack_1_true, prob.probability_attack_2_true,
-     prob.probability_attack_1_relaunch, prob.probability_attack_2_relaunch,
-     prob.list_unique_1, prob.list_unique_2,
-     prob.list_probability_die_1, prob.list_probability_die_2
-)
+        ###----------------------Select_player_01--------------------------###
+        name_player_01  =   inp.select(
+                                message="select player: ",
+                                choices=tabla_01
+                            ).execute()
+
+        print(" ")
+        ######################################################################
+        ###-----------------------Select_grup_02---------------------------###
+        ######################################################################
+        select_grup_02  =   inp.select(
+                                message="select grup 2: ",
+                                choices=list_directoriy
+                            ).execute()
+
+        tabla_02        =   pd.read_csv(f"modules/list/{select_grup_02}.dat", sep=r"\s+").set_index("Player")
+
+        ###----------------------Select_player_02--------------------------###
+        name_player_02  =   inp.select(
+                                message="select player: ",
+                                choices=tabla_02
+                            ).execute()
+
+
+        ######################################################################
+        ###--------------------------Init_cal------------------------------###
+        ######################################################################
+        player_01   =   np.array(tabla_01[f"{name_player_01}"])
+        player_02   =   np.array(tabla_02[f"{name_player_02}"])
+
+        prob    =   pb.probability(player_01, player_02)
+
+
+        ######################################################################
+        ###-------------------------Viw_result-----------------------------###
+        ######################################################################
+        os.system("clear")
+
+        plt.plot( 
+            name_player_01,
+            prob.probability_kill_1,
+            prob.probability_attack_1_true,
+            prob.probability_attack_1_relaunch,
+            prob.list_unique_1,
+            prob.list_probability_die_1,
+        )
+        print(
+            "Life "     + str(player_01[0]) + " || "  +
+            "Damage "   + str(player_01[1]) + " || "  +
+            "Dodge "    + str(player_01[2]) + " || "  +
+            "Attack "   + str(player_01[3]) + " || "  +
+            "Dices "    + str(player_01[4])
+        )
+
+
+        plt.plot( 
+            name_player_02,
+            prob.probability_kill_2,
+            prob.probability_attack_2_true,
+            prob.probability_attack_2_relaunch,
+            prob.list_unique_2,
+            prob.list_probability_die_2,
+        )
+        print(
+            "Life "     + str(player_02[0]) + " || "  +
+            "Damage "   + str(player_02[1]) + " || "  +
+            "Dodge "    + str(player_02[2]) + " || "  +
+            "Attack "   + str(player_02[3]) + " || "  +
+            "Dices "    + str(player_02[4]) + "\n"
+        )
+        
+
+os.system("clear")
 
 
