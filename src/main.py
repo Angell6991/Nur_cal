@@ -53,10 +53,21 @@ def main_menu(page: ft.Page):
         indicator_shape =   ft.RoundedRectangleBorder(radius=10),
 
         destinations    =   [
-            ft.NavigationBarDestination(icon=ft.Icon(name=ft.Icons.HOME_FILLED, color=color_01), label="MENU"),
-            ft.NavigationBarDestination(icon=ft.Icon(name=ft.Icons.EDIT_DOCUMENT, color=color_01), label="GROUPS"),
-            ft.NavigationBarDestination(icon=ft.Icon(name=ft.Icons.ANALYTICS_OUTLINED, color=color_01), 
-                                        selected_icon=ft.Icon(name=Icons.ANALYTICS, color=color_01), label="1 VS 1")
+            
+            ft.NavigationBarDestination(
+                icon=ft.Icon(name=ft.Icons.HOME_FILLED, color=color_01), 
+                label="MENU"
+            ),
+            ft.NavigationBarDestination(
+                icon=ft.Icon(name=ft.Icons.EDIT_DOCUMENT, color=color_01), 
+                label="GROUPS"
+            ),
+            ft.NavigationBarDestination(
+                icon=ft.Icon(name=ft.Icons.ANALYTICS_OUTLINED, color=color_01), 
+                selected_icon=ft.Icon(name=Icons.ANALYTICS, color=color_01), 
+                label="1 VS 1"
+            )
+
         ]
 
     )
