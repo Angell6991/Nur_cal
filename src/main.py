@@ -1,5 +1,7 @@
+import  modules.info_menu   as  info
+
 import  flet    as  ft
-from flet import Icons
+from    flet    import  Icons
 
 ########################################################
 ###-------------------Color_palette------------------###
@@ -11,7 +13,8 @@ color_04    =   "#DD6C86"
 color_05    =   "#C0CD9E"
 color_06    =   "#A8CD9E"
 color_07    =   "#9ECDAB"
-
+color_08    =   "#e2e2e2"   
+    
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
@@ -19,7 +22,9 @@ def main_menu(page: ft.Page):
 
     ###-------------------color_de_fondo-----------------###
     page.bgcolor    =   color_01
-    
+    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER   
+ 
     ###----------acciones_para_la_barra_de_menu----------###
     def action_menu(e):
         
@@ -27,8 +32,10 @@ def main_menu(page: ft.Page):
         page.controls.clear()
 
         if  selected_index  ==  0:
-            texto   =   ft.Text("hola mundo")
-            page.add(texto, menu_navegation)
+            page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
+            page.vertical_alignment = ft.MainAxisAlignment.CENTER   
+            texto   =   info.info_menu()
+            page.add(*texto, menu_navegation)
 
         elif    selected_index  ==  1:
             texto   =   ft.Text("mi primera app en flet")
@@ -72,7 +79,7 @@ def main_menu(page: ft.Page):
 
     )
     
-    return  page.add(ft.Text("saludo inicial"), menu_navegation)
+    return  page.add(*info.info_menu(), menu_navegation)
 
 ###-----------------Start_app_in_FLET----------------###
 ft.app(target=main_menu)

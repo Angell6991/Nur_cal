@@ -1,80 +1,72 @@
 import  flet    as  ft
-from flet import Icons
-
-########################################################
-###-------------------Color_palette------------------###
-########################################################
-color_01    =   "#123E39"
-color_02    =   "#3E3912"
-color_03    =   "#6CDD8B"
-color_04    =   "#DD6C86"
-color_05    =   "#C0CD9E"
-color_06    =   "#A8CD9E"
-color_07    =   "#9ECDAB"
+import  webbrowser  as  wb
 
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
-def main_menu(page: ft.Page):
-
-    ###-------------------color_de_fondo-----------------###
-    page.bgcolor    =   color_01
+def info_menu():
     
-    ###----------acciones_para_la_barra_de_menu----------###
-    def action_menu(e):
-        
-        selected_index  =   e.control.selected_index
-        page.controls.clear()
+    # ###-------------------color_de_fondo-----------------###
+    color_01    =   "#123E39"
+    color_02    =   "#3E3912"
+    color_03    =   "#6CDD8B"
+    color_04    =   "#DD6C86"
+    color_05    =   "#C0CD9E"
+    color_06    =   "#A8CD9E"
+    color_07    =   "#9ECDAB"
+    color_08    =   "#e2e2e2"   
+   
+    ###------------funciones_para_eventos_clik-----------###
+    def open_git(e):
+        return  wb.open("https://github.com/Angell6991/Nur_cal")
 
-        if  selected_index  ==  0:
-            texto   =   ft.Text("hola mundo")
-            page.add(texto, menu_navegation)
+    def open_blog(e):
+        return  wb.open("https://stivenreyesdesign.wixsite.com/nur-juego-de-rol")
+   
+    def open_help(e):
+        pass
+        # return  
 
-        elif    selected_index  ==  1:
-            texto   =   ft.Text("mi primera app en flet")
-            page.add(texto, menu_navegation)
-
-        elif    selected_index  ==  2:
-            texto   =   ft.Text("Menu de pruevas")
-            page.add(texto, menu_navegation)
-        
-        return  page.update()
+    ###-------------------contenido_del_tab--------------###
+    name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_06, font_family="FreeSerif")
+    img     =   ft.Text("Espacio reservado para la Imágen", size="10", color=color_05)
     
-    ###---------construyendo_menu_de_navegacion----------###
-    menu_navegation     =   ft.NavigationBar(
-        
-        selected_index  =   0,
-        on_change       =   action_menu,
-        bgcolor         =   color_07,
-        indicator_color =   color_05,
-        overlay_color   =   color_06,
-        shadow_color    =   "#ffffff",
-        surface_tint_color  =   "#000000",
-        indicator_shape =   ft.RoundedRectangleBorder(radius=10),
-
-        destinations    =   [
-            
-            ft.NavigationBarDestination(
-                icon=ft.Icon(name=ft.Icons.HOME_FILLED, color=color_01), 
-                label="MENU"
-            ),
-            ft.NavigationBarDestination(
-                icon=ft.Icon(name=ft.Icons.EDIT_DOCUMENT, color=color_01), 
-                label="GROUPS"
-            ),
-            ft.NavigationBarDestination(
-                icon=ft.Icon(name=ft.Icons.ANALYTICS_OUTLINED, color=color_01), 
-                selected_icon=ft.Icon(name=Icons.ANALYTICS, color=color_01), 
-                label="1 VS 1"
-            )
-
-        ]
-
+    texto   =   ft.Text(
+            f"Group management and \n probabilities calculation in battle", 
+            size="15", 
+            color=color_08, 
+            text_align=ft.TextAlign.CENTER
     )
-    
-    return  page.add(ft.Text("saludo inicial"), menu_navegation)
+   
+    git_hut =   ft.IconButton(
+        icon    =   ft.Icons.INFO, 
+        tooltip =   "Project in Github",
+        icon_size   =   30,
+        icon_color  =   color_04,
+        on_click    =   open_git,
+    )
 
-###-----------------Start_app_in_FLET----------------###
-ft.app(target=main_menu)
+    nur_web =   ft.IconButton(
+        icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
+        tooltip =   "Blog NUR",
+        icon_size   =   30,  
+        icon_color  =   color_05,
+        on_click    =   open_blog                  
+    )
 
+    help    =   ft.IconButton(
+        icon    =   ft.Icons.HELP, 
+        tooltip =   "Use of app",
+        icon_size   =   30,  
+        icon_color  =   color_05,
+        on_click    =   open_help                  
+    )
+
+    botones_en_fila =   ft.Row(
+        controls    =   [git_hut, nur_web, help],
+        spacing     =   5,  
+        alignment   =   ft.MainAxisAlignment.CENTER,  
+    )
+
+    return  [name_app, img, texto, botones_en_fila]
 
