@@ -1,21 +1,12 @@
 import  flet    as  ft
 import  webbrowser  as  wb
 
+
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
-def info_menu():
+def info_menu(color_title, color_text, color_git, color_blog, dir_imagen):
     
-    # ###-------------------color_de_fondo-----------------###
-    color_01    =   "#123E39"
-    color_02    =   "#3E3912"
-    color_03    =   "#6CDD8B"
-    color_04    =   "#DD6C86"
-    color_05    =   "#C0CD9E"
-    color_06    =   "#A8CD9E"
-    color_07    =   "#9ECDAB"
-    color_08    =   "#e2e2e2"   
-   
     ###------------funciones_para_eventos_clik-----------###
     def open_git(e):
         return  wb.open("https://github.com/Angell6991/Nur_cal")
@@ -24,21 +15,21 @@ def info_menu():
         return  wb.open("https://stivenreyesdesign.wixsite.com/nur-juego-de-rol")
    
     ###-------------------contenido_del_tab--------------###
-    name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_06, font_family="FreeSerif")
-    img     =   ft.Text("Espacio reservado para la Imágen", size="10", color=color_05)
-    
+    name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_title, font_family="FreeSerif")
+    imagen      =   ft.Image(src=str(dir_imagen), width=200) 
+
     texto   =   ft.Text(
             f"Group management and \n probabilities calculation in battle", 
-            size="15", 
-            color=color_08, 
-            text_align=ft.TextAlign.CENTER
+            size    =   "15", 
+            color   =   color_text, 
+            text_align  =   ft.TextAlign.CENTER
     )
    
     git_hut =   ft.IconButton(
         icon    =   ft.Icons.INFO, 
         tooltip =   "Project in Github",
         icon_size   =   30,
-        icon_color  =   color_04,
+        icon_color  =   color_git,
         on_click    =   open_git,
     )
 
@@ -46,7 +37,7 @@ def info_menu():
         icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
         tooltip =   "Blog NUR",
         icon_size   =   30,  
-        icon_color  =   color_05,
+        icon_color  =   color_blog,
         on_click    =   open_blog                  
     )
 
@@ -56,7 +47,7 @@ def info_menu():
         alignment   =   ft.MainAxisAlignment.CENTER,  
     )
 
-    menu    =   [name_app, img, texto, botones_en_fila]
+    menu    =   [name_app, imagen, texto, botones_en_fila]
     return  menu
 
 

@@ -22,8 +22,8 @@ def main_menu(page: ft.Page):
 
     ###-------------------color_de_fondo-----------------###
     page.bgcolor    =   color_01
-    page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER   
+    page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
+    page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
  
     ###----------acciones_para_la_barra_de_menu----------###
     def action_menu(e):
@@ -32,18 +32,24 @@ def main_menu(page: ft.Page):
         page.controls.clear()
 
         if  selected_index  ==  0:
-            page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
-            page.vertical_alignment = ft.MainAxisAlignment.CENTER   
-            texto   =   info.info_menu()
-            page.add(*texto, menu_navegation)
+            page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
+            page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
+            page.add(
+                *info.info_menu(color_06, color_08, color_04, color_05, "storage/data/logo.png"),
+                menu_navegation
+            )
 
         elif    selected_index  ==  1:
-            texto   =   ft.Text("mi primera app en flet")
-            page.add(texto, menu_navegation)
+            page.add(
+                ft.Text("mi primera app en flet"), 
+                menu_navegation
+            )
 
         elif    selected_index  ==  2:
-            texto   =   ft.Text("Menu de pruevas")
-            page.add(texto, menu_navegation)
+            page.add(
+                ft.Text("Menu de pruevas"), 
+                menu_navegation
+            )
         
         return  page.update()
     
@@ -79,7 +85,7 @@ def main_menu(page: ft.Page):
 
     )
     
-    return  page.add(*info.info_menu(), menu_navegation)
+    return  page.add(*info.info_menu(color_06, color_08, color_04, color_05, "storage/data/logo.png"), menu_navegation)
 
 ###-----------------Start_app_in_FLET----------------###
 ft.app(target=main_menu)
