@@ -23,10 +23,6 @@ def info_menu():
     def open_blog(e):
         return  wb.open("https://stivenreyesdesign.wixsite.com/nur-juego-de-rol")
    
-    def open_help(e):
-        pass
-        # return  
-
     ###-------------------contenido_del_tab--------------###
     name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_06, font_family="FreeSerif")
     img     =   ft.Text("Espacio reservado para la Imágen", size="10", color=color_05)
@@ -54,19 +50,13 @@ def info_menu():
         on_click    =   open_blog                  
     )
 
-    help    =   ft.IconButton(
-        icon    =   ft.Icons.HELP, 
-        tooltip =   "Use of app",
-        icon_size   =   30,  
-        icon_color  =   color_05,
-        on_click    =   open_help                  
-    )
-
     botones_en_fila =   ft.Row(
-        controls    =   [git_hut, nur_web, help],
+        controls    =   [git_hut, nur_web],
         spacing     =   5,  
         alignment   =   ft.MainAxisAlignment.CENTER,  
     )
 
-    return  [name_app, img, texto, botones_en_fila]
+    menu    =   [name_app, img, texto, botones_en_fila]
+    return  menu
+
 
