@@ -7,13 +7,6 @@ import  webbrowser  as  wb
 ########################################################
 def info_menu(color_title, color_text, color_git, color_blog, dir_imagen):
     
-    ###------------funciones_para_eventos_clik-----------###
-    def open_git(e):
-        return  wb.open("https://github.com/Angell6991/Nur_cal")
-
-    def open_blog(e):
-        return  wb.open("https://stivenreyesdesign.wixsite.com/nur-juego-de-rol")
-   
     ###-------------------contenido_del_tab--------------###
     name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_title, font_family="FreeSerif")
     imagen      =   ft.Image(src=str(dir_imagen), width=200) 
@@ -26,19 +19,19 @@ def info_menu(color_title, color_text, color_git, color_blog, dir_imagen):
     )
    
     git_hut =   ft.IconButton(
+        url     =   "https://github.com/Angell6991/Nur_cal",
         icon    =   ft.Icons.INFO, 
         tooltip =   "Project in Github",
         icon_size   =   30,
         icon_color  =   color_git,
-        on_click    =   open_git,
     )
 
     nur_web =   ft.IconButton(
+        url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
         icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
         tooltip =   "Blog NUR",
         icon_size   =   30,  
         icon_color  =   color_blog,
-        on_click    =   open_blog                  
     )
 
     botones_en_fila =   ft.Row(
