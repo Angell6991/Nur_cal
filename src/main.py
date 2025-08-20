@@ -21,10 +21,11 @@ color_08    =   "#e2e2e2"
 def main_menu(page: ft.Page):
 
     ###-------------------color_de_fondo-----------------###
+    page.padding    =   20
     page.bgcolor    =   color_01
     page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
     page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
- 
+    
     ###----------acciones_para_la_barra_de_menu----------###
     def action_menu(e):
         
