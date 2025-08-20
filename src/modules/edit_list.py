@@ -9,6 +9,23 @@ os.system("clear")
 direct_texting  =   os.path.join("..", "storage/data/list")
 contenido       =   os.listdir(direct_texting)
 
+def view_table(direct, name):
+
+    table   =   pd.read_csv(f"{direct}/{name}.dat", sep=r"\s+")
+    columns =   table.columns.tolist()
+
+    view    =   ft.DataTable(
+        columns =   [ft.DataColumn(ft.Text(str(col))) for col in columns],
+        rows    =   [
+            ft.DataRow(
+                [ft.DataCell(ft.Text(str(table.iloc[j,i]))) for i in range(len(columns))]
+            )
+            for j   in  range(5)
+        ]
+    )
+
+    return  view
+
 ######################################################################
 ###----------------------------------------------------------------###
 ######################################################################
@@ -19,6 +36,7 @@ def edit_list(page: ft.Page):
         return  page.add(ft.Text(str(contenido), size=30))
 
     texto   =   ft.Text("hola mundo")
+    graph   =   view_table(direct_texting, "group texting")
 
     boton   =   ft.FloatingActionButton(
         on_click    =   action_boton, 
@@ -31,7 +49,7 @@ def edit_list(page: ft.Page):
     page.scroll = ft.ScrollMode.HIDDEN
     page.floating_action_button     =   boton
 
-    return  page.add(texto)
+    return  page.add(texto, graph)
 
 ######################################################################
 ###------------------------Texting_pogram--------------------------###
@@ -40,7 +58,6 @@ ft.app(target=edit_list)
 
 
 
-# import flet as ft
 
 
 # def main(page: ft.Page):
