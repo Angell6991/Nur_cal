@@ -1,3 +1,4 @@
+from numpy import size
 import  modules.data_list   as  data
 
 import  pandas  as  pd
@@ -12,6 +13,16 @@ os.system("clear")
 direct_texting  =   os.path.join("..", "storage/data/list")
 contenido       =   os.listdir(direct_texting)
 
+color_01    =   "#123E39"
+color_02    =   "#3E3912"
+color_03    =   "#6CDD8B"
+color_04    =   "#DD6C86"
+color_05    =   "#C0CD9E"
+color_06    =   "#A8CD9E"
+color_07    =   "#9ECDAB"
+color_08    =   "#e2e2e2" 
+color_09    =   "#2e2e2e"
+
 ######################################################################
 ###-------------------definition_functions-------------------------###
 ######################################################################
@@ -24,20 +35,20 @@ def view_table(direct, name):
 
     view    =   ft.DataTable(
         
-        heading_row_color   =   "#121212",
+        heading_row_color   =   color_06,
         sort_ascending      =   True,
-        bgcolor             =   "#e2e2e2",
-        border              =   ft.border.all(2, "#2e2e2e"),
+        bgcolor             =   color_05,
+        border              =   ft.border.all(2, color_02),
         border_radius       =   10,
-        vertical_lines      =   ft.border.BorderSide(1, "#2e2e2e"),
-        horizontal_lines    =   ft.border.BorderSide(1, "#2e2e2e"),
+        vertical_lines      =   ft.border.BorderSide(1, color_02),
+        horizontal_lines    =   ft.border.BorderSide(1, color_02),
         heading_row_height  =   35,
         divider_thickness   =   0,
         column_spacing      =   22,
 
-        columns =   [ft.DataColumn(ft.Text(str(col), color="#f4f4f4"))  for col in  columns],
+        columns =   [ft.DataColumn(ft.Text(str(col), color=color_01))  for col in  columns],
         rows    =   [ft.DataRow(
-            [ft.DataCell(ft.Text(str(table.iloc[j,i]), color="#2e2e2e"))    for i   in  range(len(columns))]
+            [ft.DataCell(ft.Text(str(table.iloc[j,i]), color=color_09))    for i   in  range(len(columns))]
         )   for j   in  range(5)]
     )
 
@@ -49,8 +60,8 @@ def button_new_group(action):
     boton   =   ft.FloatingActionButton(
         on_click    =   action, 
         icon        =   ft.Icons.ADD,
-        bgcolor     =   "#2e2e2e",
-        foreground_color    =   "#e2e2e2",
+        bgcolor     =   color_06,
+        foreground_color    =   color_01,
     )
 
     return  boton
@@ -59,18 +70,17 @@ def button_new_group(action):
 def intro_bar(intro):
     intro_text  =   ft.TextField(
         label   =   str(intro), 
-        color   =   "#7b68ee", 
-        bgcolor =   "#e2e2e2", 
-        # on_change   =   save_bar
-        label_style =   ft.TextStyle(color="#808000"),
-        border_color    =   "#121212", 
+        color   =   color_01, 
+        bgcolor =   color_07, 
+        label_style =   ft.TextStyle(color=color_09),
+        border_color    =   color_09, 
         border_radius   =   10,
         border_width    =   1,
-        cursor_color    =   "#121212",
+        cursor_color    =   color_09,
         cursor_height   =   20,
         cursor_radius   =   10,
         cursor_width    =   1,
-        selection_color =   "#808000",
+        selection_color =   color_08,
     )
 
     return  intro_text
@@ -80,8 +90,8 @@ def generit_button(action, label):
     boton   =   ft.FilledButton(
         str(label),
         on_click=   action,
-        color   =   "#121212",
-        bgcolor =   "#7b68ee",
+        color   =   color_01,
+        bgcolor =   color_06,
         style   =   ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10))
     )
     return  boton
@@ -112,7 +122,6 @@ def edit_list(page: ft.Page):
                 nonlocal names, atribut
                 names.append(name.value)
                 atribut.append([int(life.value), int(damage.value), int(dodge.value), int(attack.value), int(dices.value)])
-                print(names, atribut)
                 save_players(e)
 
             name    =   intro_bar("Name player")
@@ -146,6 +155,7 @@ def edit_list(page: ft.Page):
 
     ###------------------------Dibujando_en_flet-----------------------###
     graph   =   view_table(direct_texting, "group texting")
+    page.bgcolor    =   color_01
     page.padding    =   20
     page.scroll     =   ft.ScrollMode.HIDDEN
     page.floating_action_button     =   button_new_group(new_list)
