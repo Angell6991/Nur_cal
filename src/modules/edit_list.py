@@ -94,15 +94,26 @@ def edit_list(page: ft.Page):
 
     ###--------funcion_para_guardar_name_goups _y_number_players-------###
     def new_list(e):
-
+        
+        names   =   []
+        atribut =   []
+        
         def save_and_exit(e):
 
             page.controls.clear()
             page.floating_action_button     =   button_new_group(new_list)
             page.add(graph)
+            data.new_list(direct_texting, str(name_group.value), names, atribut)
             return  page.update()
-        
+
         def save_players(e):
+            
+            def save_data(e):
+                nonlocal names, atribut
+                names.append(name.value)
+                atribut.append([int(life.value), int(damage.value), int(dodge.value), int(attack.value), int(dices.value)])
+                print(names, atribut)
+                save_players(e)
 
             name    =   intro_bar("Name player")
             life    =   intro_bar("Life")
@@ -112,7 +123,7 @@ def edit_list(page: ft.Page):
             dices   =   intro_bar("Dices")
             button_save     =   ft.Row(
                 controls    =   [generit_button(save_and_exit, "Save list and exit"), 
-                                 generit_button(save_players, "Save data and next player")],
+                                 generit_button(save_data, "Save data and next player")],
                 alignment   =   ft.MainAxisAlignment.CENTER,  
             )
 
