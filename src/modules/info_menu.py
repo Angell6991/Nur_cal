@@ -1,45 +1,43 @@
 import  flet    as  ft
 
-
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
-def info_menu(color_title, color_text, color_git, color_blog, dir_imagen):
-    
-    ###-------------------contenido_del_tab--------------###
-    name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_title, font_family="FreeSerif")
-    imagen      =   ft.Image(src=str(dir_imagen), width=200) 
+class   info_menu:
 
-    texto   =   ft.Text(
-            f"Group management and \n probabilities calculation in battle", 
-            size    =   "15", 
-            color   =   color_text, 
-            text_align  =   ft.TextAlign.CENTER
-    )
-   
-    git_hut =   ft.IconButton(
-        url     =   "https://github.com/Angell6991/Nur_cal",
-        icon    =   ft.Icons.INFO, 
-        tooltip =   "Project in Github",
-        icon_size   =   30,
-        icon_color  =   color_git,
-    )
+    def __init__ (self, color_title, color_text, color_git, color_blog, dir_imagen):
 
-    nur_web =   ft.IconButton(
-        url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
-        icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
-        tooltip =   "Blog NUR",
-        icon_size   =   30,  
-        icon_color  =   color_blog,
-    )
+        ###-------------------contenido_del_tab--------------###
+        self.name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_title, font_family="FreeSerif")
+        self.imagen      =   ft.Image(src=str(dir_imagen), width=200) 
 
-    botones_en_fila =   ft.Row(
-        controls    =   [git_hut, nur_web],
-        spacing     =   5,  
-        alignment   =   ft.MainAxisAlignment.CENTER,  
-    )
+        self.texto   =   ft.Text(
+                f"Group management and \n probabilities calculation in battle", 
+                size    =   "15", 
+                color   =   color_text, 
+                text_align  =   ft.TextAlign.CENTER
+        )
+       
+        self.git_hut =   ft.IconButton(
+            url     =   "https://github.com/Angell6991/Nur_cal",
+            icon    =   ft.Icons.INFO, 
+            tooltip =   "Project in Github",
+            icon_size   =   30,
+            icon_color  =   color_git,
+        )
 
-    menu    =   [name_app, imagen, texto, botones_en_fila]
-    return  menu
+        self.nur_web =   ft.IconButton(
+            url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
+            icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
+            tooltip =   "Blog NUR",
+            icon_size   =   30,  
+            icon_color  =   color_blog,
+        )
+
+        self.botones_en_fila =   ft.Row(
+            controls    =   [self.git_hut, self.nur_web],
+            spacing     =   5,  
+            alignment   =   ft.MainAxisAlignment.CENTER,  
+        )
 
 
