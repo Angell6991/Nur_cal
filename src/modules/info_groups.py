@@ -1,4 +1,3 @@
-from numpy import size
 import  modules.data_list   as  data
 
 import  pandas  as  pd
