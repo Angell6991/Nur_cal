@@ -12,15 +12,11 @@ os.system("clear")
 direct_texting  =   os.path.join("..", "storage/data/list")
 contenido       =   os.listdir(direct_texting)
 
-color_01    =   "#123E39"
-color_02    =   "#3E3912"
-color_03    =   "#6CDD8B"
-color_04    =   "#DD6C86"
-color_05    =   "#C0CD9E"
-color_06    =   "#A8CD9E"
-color_07    =   "#9ECDAB"
-color_08    =   "#e2e2e2" 
-color_09    =   "#2e2e2e"
+color   =   [
+    "#123E39", "#3E3912", "#6CDD8B", "#DD6C86",
+    "#C0CD9E", "#A8CD9E", "#9ECDAB", "#e2e2e2",   
+    "#2e2e2e", "#2f4f4f"
+]
 
 ######################################################################
 ###-------------------definition_functions-------------------------###
@@ -34,20 +30,20 @@ def view_table(direct, name):
 
     view    =   ft.DataTable(
         
-        heading_row_color   =   color_06,
+        heading_row_color   =   color[5],
         sort_ascending      =   True,
-        bgcolor             =   color_05,
-        border              =   ft.border.all(2, color_02),
+        bgcolor             =   color[4],
+        border              =   ft.border.all(2, color[1]),
         border_radius       =   10,
-        vertical_lines      =   ft.border.BorderSide(1, color_02),
-        horizontal_lines    =   ft.border.BorderSide(1, color_02),
+        vertical_lines      =   ft.border.BorderSide(1, color[1]),
+        horizontal_lines    =   ft.border.BorderSide(1, color[1]),
         heading_row_height  =   35,
         divider_thickness   =   0,
         column_spacing      =   22,
 
-        columns =   [ft.DataColumn(ft.Text(str(col), color=color_01))  for col in  columns],
+        columns =   [ft.DataColumn(ft.Text(str(col), color=color[0]))  for col in  columns],
         rows    =   [ft.DataRow(
-            [ft.DataCell(ft.Text(str(table.iloc[j,i]), color=color_09))    for i   in  range(len(columns))]
+            [ft.DataCell(ft.Text(str(table.iloc[j,i]), color=color[8]))    for i   in  range(len(columns))]
         )   for j   in  range(5)]
     )
 
@@ -57,17 +53,17 @@ def view_table(direct, name):
 def input_box(intro):
     intro_text  =   ft.TextField(
         label   =   str(intro), 
-        color   =   color_01, 
-        bgcolor =   color_07, 
-        label_style =   ft.TextStyle(color=color_09),
-        border_color    =   color_09, 
+        color   =   color[7], 
+        bgcolor =   color[9], 
+        label_style =   ft.TextStyle(color=color[6]),
+        border_color    =   color[6], 
         border_radius   =   10,
         border_width    =   1,
-        cursor_color    =   color_09,
+        cursor_color    =   color[6],
         cursor_height   =   20,
         cursor_radius   =   10,
         cursor_width    =   1,
-        selection_color =   color_08,
+        selection_color =   color[0],
     )
 
     return  intro_text
@@ -78,8 +74,8 @@ def button_new_group(action):
     boton   =   ft.FloatingActionButton(
         on_click    =   action, 
         icon        =   ft.Icons.ADD,
-        bgcolor     =   color_06,
-        foreground_color    =   color_01,
+        bgcolor     =   color[5],
+        foreground_color    =   color[0],
     )
 
     return  boton
@@ -87,11 +83,11 @@ def button_new_group(action):
 ###-------------------------button_generic-------------------------###
 def button_generic(action, label):
     boton   =   ft.FilledButton(
-        str(label),
+        content =   ft.Text(str(label), size=18),
         on_click=   action,
-        color   =   color_01,
-        bgcolor =   color_06,
-        style   =   ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=10))
+        color   =   color[0],
+        bgcolor =   color[5],
+        style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28))
     )
     return  boton
 
@@ -130,8 +126,8 @@ def edit_list(page: ft.Page):
             attack  =   input_box("Attack")
             dices   =   input_box("Dices")
             button_save     =   ft.Row(
-                controls    =   [button_generic(save_and_exit, "Save list and exit"), 
-                                 button_generic(save_data, "Save data and next player")],
+                controls    =   [button_generic(save_and_exit, "Save and create a group"), 
+                                 button_generic(save_data, "Save player and add another")],
                 alignment   =   ft.MainAxisAlignment.CENTER,  
             )
 
@@ -154,7 +150,7 @@ def edit_list(page: ft.Page):
 
     ###------------------------Dibujando_en_flet-----------------------###
     graph   =   view_table(direct_texting, "group texting")
-    page.bgcolor    =   color_01
+    page.bgcolor    =   color[0]
     page.padding    =   20
     page.scroll     =   ft.ScrollMode.HIDDEN
     page.floating_action_button     =   button_new_group(new_list)
