@@ -24,7 +24,7 @@ color   =   [
 
 ###------------------------view_data_grups-------------------------###
 def view_table(direct, name):
-
+    
     table   =   pd.read_csv(f"{direct}/{name}.dat", sep=r"\s+")
     columns =   table.columns.tolist()
 
@@ -46,11 +46,11 @@ def view_table(direct, name):
             [ft.DataCell(ft.Text(str(table.iloc[j,i]), color=color[8]))    for i   in  range(len(columns))]
         )   for j   in  range(5)]
     )
-
     return  view
 
 ###-------------------------bar_intro_data-------------------------###
 def input_box(intro):
+    
     intro_text  =   ft.TextField(
         label   =   str(intro), 
         color   =   color[7], 
@@ -65,23 +65,22 @@ def input_box(intro):
         cursor_width    =   1,
         selection_color =   color[0],
     )
-
     return  intro_text
 
 ###----------------------button_crated_group-----------------------###
 def button_new_group(action):
-
+    
     boton   =   ft.FloatingActionButton(
         on_click    =   action, 
         icon        =   ft.Icons.ADD,
         bgcolor     =   color[5],
         foreground_color    =   color[0],
     )
-
     return  boton
 
 ###-------------------------button_icon-------------------------###
 def button_icon(action, label, icono):
+    
     boton   =   ft.FilledButton(
         content =   ft.Row([
             ft.Icon(icono, color=0, size=20),
@@ -97,6 +96,7 @@ def button_icon(action, label, icono):
 
 ###-------------------------button_generic-------------------------###
 def button_generic(action, label, icono):
+    
     boton   =   ft.FilledButton(
         content =   ft.Text(str(label), size=15, text_align=ft.TextAlign.CENTER),
         on_click=   action,
@@ -169,7 +169,6 @@ def edit_list(page: ft.Page):
     page.padding    =   20
     page.scroll     =   ft.ScrollMode.HIDDEN
     page.floating_action_button     =   button_new_group(new_list)
-    
     return  page.add(graph) 
 
 ###------------------------Texting_pogram--------------------------###

@@ -60,7 +60,6 @@ def main_menu(page: ft.Page):
         indicator_shape =   ft.RoundedRectangleBorder(radius=10),
 
         destinations    =   [
-            
             ft.NavigationBarDestination(
                 icon=ft.Icon(name=ft.Icons.HOME_FILLED, color=color[0]), 
                 label="MENU"
@@ -74,9 +73,7 @@ def main_menu(page: ft.Page):
                 selected_icon=ft.Icon(name=Icons.ANALYTICS, color=color[0]), 
                 label="1 VS 1"
             )
-
         ]
-
     )
     
     ###----------------construct_page_main---------------###
@@ -85,7 +82,6 @@ def main_menu(page: ft.Page):
     page.theme_mode =   "LIGHT"
     page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
     page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
-    
     return  page.add(mn.name_app, mn.imagen, mn.texto, mn.botones_en_fila, menu_navegation)
 
 ###-----------------Start_app_in_FLET----------------###
