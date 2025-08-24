@@ -80,14 +80,29 @@ def button_new_group(action):
 
     return  boton
 
-###-------------------------button_generic-------------------------###
-def button_generic(action, label):
+###-------------------------button_icon-------------------------###
+def button_icon(action, label, icono):
     boton   =   ft.FilledButton(
-        content =   ft.Text(str(label), size=18),
+        content =   ft.Row([
+            ft.Icon(icono, color=0, size=20),
+            ft.Text(str(label), size=15, text_align=ft.TextAlign.CENTER),
+        ], alignment=ft.MainAxisAlignment.CENTER, spacing=8
+        ),
         on_click=   action,
         color   =   color[0],
         bgcolor =   color[5],
-        style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28))
+        style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28)),
+    )
+    return  boton
+
+###-------------------------button_generic-------------------------###
+def button_generic(action, label, icono):
+    boton   =   ft.FilledButton(
+        content =   ft.Text(str(label), size=15, text_align=ft.TextAlign.CENTER),
+        on_click=   action,
+        color   =   color[0],
+        bgcolor =   color[5],
+        style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28)),
     )
     return  boton
 
@@ -126,8 +141,8 @@ def edit_list(page: ft.Page):
             attack  =   input_box("Attack")
             dices   =   input_box("Dices")
             button_save     =   ft.Row(
-                controls    =   [button_generic(save_and_exit, "Save and create a group"), 
-                                 button_generic(save_data, "Save player and add another")],
+                controls    =   [button_icon(save_and_exit, "Save group exit", ft.Icons.SAVE), 
+                                 button_icon(save_data, "Save player", ft.Icons.GROUP_ADD)],
                 alignment   =   ft.MainAxisAlignment.CENTER,  
             )
 
@@ -138,7 +153,7 @@ def edit_list(page: ft.Page):
 
         name_group      =   input_box("Name group")
         button_next     =   ft.Row(
-            controls    =   [button_generic(save_players, "Save name and intro players")],
+            controls    =   [button_icon(save_players, "Save and intro players", ft.Icons.SAVE_ALT)],
             alignment   =   ft.MainAxisAlignment.CENTER,  
         )
 
