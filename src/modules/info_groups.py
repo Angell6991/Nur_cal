@@ -54,20 +54,8 @@ def view_table(direct, name):
 
     return  view
 
-###----------------------button_crated_group-----------------------###
-def button_new_group(action):
-
-    boton   =   ft.FloatingActionButton(
-        on_click    =   action, 
-        icon        =   ft.Icons.ADD,
-        bgcolor     =   color_06,
-        foreground_color    =   color_01,
-    )
-
-    return  boton
-
 ###-------------------------bar_intro_data-------------------------###
-def intro_bar(intro):
+def input_box(intro):
     intro_text  =   ft.TextField(
         label   =   str(intro), 
         color   =   color_01, 
@@ -85,8 +73,20 @@ def intro_bar(intro):
 
     return  intro_text
 
-###-------------------------generit_button-------------------------###
-def generit_button(action, label):
+###----------------------button_crated_group-----------------------###
+def button_new_group(action):
+
+    boton   =   ft.FloatingActionButton(
+        on_click    =   action, 
+        icon        =   ft.Icons.ADD,
+        bgcolor     =   color_06,
+        foreground_color    =   color_01,
+    )
+
+    return  boton
+
+###-------------------------button_generic-------------------------###
+def button_generic(action, label):
     boton   =   ft.FilledButton(
         str(label),
         on_click=   action,
@@ -102,7 +102,7 @@ def generit_button(action, label):
 ######################################################################
 def edit_list(page: ft.Page):
 
-    ###--------funcion_para_guardar_name_goups _y_number_players-------###
+    ###---------funcion_para_guardar_name_goups_y_number_players-------###
     def new_list(e):
         
         names   =   []
@@ -124,15 +124,15 @@ def edit_list(page: ft.Page):
                 atribut.append([int(life.value), int(damage.value), int(dodge.value), int(attack.value), int(dices.value)])
                 save_players(e)
 
-            name    =   intro_bar("Name player")
-            life    =   intro_bar("Life")
-            damage  =   intro_bar("Damage")
-            dodge   =   intro_bar("Dodge")
-            attack  =   intro_bar("Attack")
-            dices   =   intro_bar("Dices")
+            name    =   input_box("Name player")
+            life    =   input_box("Life")
+            damage  =   input_box("Damage")
+            dodge   =   input_box("Dodge")
+            attack  =   input_box("Attack")
+            dices   =   input_box("Dices")
             button_save     =   ft.Row(
-                controls    =   [generit_button(save_and_exit, "Save list and exit"), 
-                                 generit_button(save_data, "Save data and next player")],
+                controls    =   [button_generic(save_and_exit, "Save list and exit"), 
+                                 button_generic(save_data, "Save data and next player")],
                 alignment   =   ft.MainAxisAlignment.CENTER,  
             )
 
@@ -141,9 +141,9 @@ def edit_list(page: ft.Page):
             page.add(name, life, damage, dodge, attack, dices, button_save)
             return  page.update()
 
-        name_group      =   intro_bar("Name group")
+        name_group      =   input_box("Name group")
         button_next     =   ft.Row(
-            controls    =   [generit_button(save_players, "Save name and intro players")],
+            controls    =   [button_generic(save_players, "Save name and intro players")],
             alignment   =   ft.MainAxisAlignment.CENTER,  
         )
 
