@@ -5,17 +5,28 @@ import  flet    as  ft
 ########################################################
 class   info_menu:
 
-    def __init__ (self, color_title, color_text, color_git, color_blog, dir_imagen):
+    def __init__ (self, color_title, color_text, color_git, color_blog, font, dir_imagen):
 
         ###-------------------contenido_del_tab--------------###
-        self.name_app    =   ft.Text("NUR CALCULATOR", size="40", color=color_title, font_family="FreeSerif")
+        self.name_app    =   ft.Text(
+            "Nur Calculator", 
+            size    =   "50", 
+            color   =   color_title, 
+            weight  =   ft.FontWeight.BOLD,
+            italic  =   True,
+            font_family =   font[0] 
+        )
+
         self.imagen      =   ft.Image(src=str(dir_imagen), width=200) 
 
         self.texto   =   ft.Text(
                 f"Group management and \n probabilities calculation in battle", 
-                size    =   "15", 
+                size    =   "18", 
                 color   =   color_text, 
-                text_align  =   ft.TextAlign.CENTER
+                text_align  =   ft.TextAlign.CENTER,
+                # weight  =   ft.FontWeight.BOLD,
+                # italic  =   True,
+                font_family =   font[1]
         )
        
         self.git_hut =   ft.IconButton(

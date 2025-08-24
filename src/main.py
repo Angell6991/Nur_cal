@@ -12,6 +12,8 @@ color   =   [
     "#2e2e2e", "#2f4f4f"
 ]
 
+font    =   ["Noto Serif Display", "TSCu_Times", "TSCu_Comic"]
+
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
@@ -45,7 +47,7 @@ def main_menu(page: ft.Page):
    
 
     ###-------------import_module_info_menu--------------###
-    mn  =   menu.info_menu(color[5], color[7], color[3], color[4], "storage/data/logo.png")
+    mn  =   menu.info_menu(color[5], color[7], color[3], color[4], font, "storage/data/logo.png")
 
     ###---------construyendo_menu_de_navegacion----------###
     menu_navegation     =   ft.NavigationBar(
