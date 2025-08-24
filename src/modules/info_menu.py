@@ -21,11 +21,11 @@ class   info_menu:
 
         self.texto   =   ft.Text(
                 f"Group management and \n probabilities calculation in battle", 
-                size    =   "18", 
+                size    =   "15", 
                 color   =   color_text, 
                 text_align  =   ft.TextAlign.CENTER,
-                # weight  =   ft.FontWeight.BOLD,
-                # italic  =   True,
+                weight  =   ft.FontWeight.BOLD,
+                italic  =   True,
                 font_family =   font[1]
         )
        

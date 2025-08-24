@@ -12,7 +12,7 @@ color   =   [
     "#2e2e2e", "#2f4f4f"
 ]
 
-font    =   ["Noto Serif Display", "TSCu_Times", "TSCu_Comic"]
+font    =   ["Noto Serif Display", "Ubuntu"]
 
 ########################################################
 ###------------------Main_menu_flet------------------###
