@@ -9,6 +9,7 @@ os.system("clear")
 ######################################################################
 ###--------------------export_contet_texting-----------------------###
 ######################################################################
+direct_imagen   =   os.path.join("..", "storage/data")
 direct_texting  =   os.path.join("..", "storage/data/list")
 contenido       =   os.listdir(direct_texting)
 
@@ -67,6 +68,17 @@ def input_box(intro):
     )
     return  intro_text
 
+###-------------------------baner_group----------------------------###
+def baner_group():
+    texto   =   ft.Text("Groups list", size=40, color=color[8])
+    imagen  =   ft.Image(src=f"{direct_imagen}/logo_01.png", width=200)
+    box     =   ft.Row(
+        controls    =   [imagen, texto],
+        spacing     =   45,
+    )
+    cont    =   ft.Container(content=box, bgcolor=color[5], border_radius=15)
+    return  cont
+
 ###----------------------button_crated_group-----------------------###
 def button_new_group(action):
     
@@ -83,7 +95,7 @@ def button_icon(action, label, icono):
     
     boton   =   ft.FilledButton(
         content =   ft.Row([
-            ft.Icon(icono, color=0, size=20),
+            ft.Icon(icono, size=20),
             ft.Text(str(label), size=15, text_align=ft.TextAlign.CENTER),
         ], alignment=ft.MainAxisAlignment.CENTER, spacing=8
         ),
@@ -172,6 +184,30 @@ def edit_list(page: ft.Page):
     return  page.add(graph) 
 
 ###------------------------Texting_pogram--------------------------###
-ft.app(target=edit_list)
+# ft.app(target=edit_list)
+
+
+def main(page: ft.Page):
+    
+    def button_group_list(name):
+        boton   =   ft.TextButton(
+            content =   ft.Row([
+                ft.Icon(ft.Icons.LIST_ROUNDED, size=50, color=color[7]),
+                ft.Text(str(name), size=30, text_align=ft.TextAlign.CENTER, color=color[7]),
+            ], alignment=ft.VerticalAlignment.START, spacing=10
+            )
+        )
+        return  boton
+    
+    lista   =   os.listdir(direct_texting)
+    lista   =   [filename.replace(".dat", "") for filename in lista]    
+    lista   =   [button_group_list(i) for i in lista]
+    
+    page.bgcolor    =   color[0]
+    page.padding    =   20
+    page.scroll     =   ft.ScrollMode.HIDDEN
+    return  page.add(baner_group(), *lista)
+
+ft.app(target=main)
 
 
