@@ -1,3 +1,4 @@
+from signal import siginterrupt
 import  flet    as  ft
 
 ########################################################
@@ -29,20 +30,16 @@ class   info_menu:
                 font_family =   font[1]
         )
        
-        self.git_hut =   ft.IconButton(
+        self.git_hut   =   ft.TextButton(
+            content =   ft.Text("  ", size=30, color=color_git),
             url     =   "https://github.com/Angell6991/Nur_cal",
-            icon    =   ft.Icons.INFO, 
-            tooltip =   "Project in Github",
-            icon_size   =   30,
-            icon_color  =   color_git,
+            style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )
 
-        self.nur_web =   ft.IconButton(
+        self.nur_web   =   ft.TextButton(
+            content =   ft.Text("󰖟  ", size=30, color=color_blog),
             url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
-            icon    =   ft.Icons.CONTENT_PASTE_SEARCH, 
-            tooltip =   "Blog NUR",
-            icon_size   =   30,  
-            icon_color  =   color_blog,
+            style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )
 
         self.botones_en_fila =   ft.Row(

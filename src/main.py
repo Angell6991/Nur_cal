@@ -7,12 +7,12 @@ from    flet    import  Icons
 ###-------------------Color_palette------------------###
 ########################################################
 color   =   [
-    "#123E39", "#3E3912", "#6CDD8B", "#DD6C86",
-    "#C0CD9E", "#A8CD9E", "#9ECDAB", "#e2e2e2",   
-    "#2e2e2e", "#2f4f4f"
+    "#045060", "#033742", "#0790AD", "#6DDEF7",
+    "#FF9442", "#DD6C86", "#e2e2e2", "#2e2e2e",
+    "#9FDFED"
 ]
 
-font    =   ["Noto Serif Display", "Ubuntu"]
+font    =   ["Noto Serif Display", "Noto Sans"]
 
 ########################################################
 ###------------------Main_menu_flet------------------###
@@ -47,18 +47,18 @@ def main_menu(page: ft.Page):
    
 
     ###-------------import_module_info_menu--------------###
-    mn  =   menu.info_menu(color[5], color[7], color[3], color[4], font, "storage/data/logo.png")
+    mn  =   menu.info_menu(color[4], color[6], color[3], color[4], font, "storage/data/logo.png")
 
     ###---------construyendo_menu_de_navegacion----------###
     menu_navegation     =   ft.NavigationBar(
         
         selected_index  =   0,
         on_change       =   action_menu,
-        bgcolor         =   color[6],
+        bgcolor         =   color[8],
         indicator_color =   color[4],
-        overlay_color   =   color[5],
-        shadow_color    =   "#ffffff",
-        surface_tint_color  =   "#000000",
+        overlay_color   =   color[2],
+        # shadow_color    =   "#ffffff",
+        # surface_tint_color  =   "#000000",
         indicator_shape =   ft.RoundedRectangleBorder(radius=10),
 
         destinations    =   [
@@ -71,8 +71,8 @@ def main_menu(page: ft.Page):
                 label="GROUPS"
             ),
             ft.NavigationBarDestination(
-                icon=ft.Icon(name=ft.Icons.ANALYTICS_OUTLINED, color=color[0]), 
-                selected_icon=ft.Icon(name=Icons.ANALYTICS, color=color[0]), 
+                icon=ft.Icon(name=ft.Icons.ANALYTICS, color=color[0]), 
+                # selected_icon=ft.Icon(name=Icons.ANALYTICS_OUTLINED, color=color[0]), 
                 label="1 VS 1"
             )
         ]
