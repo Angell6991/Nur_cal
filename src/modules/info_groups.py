@@ -1,4 +1,3 @@
-from flet.core.text_button import TextButton
 import  modules.data_list   as  data
 
 import  pandas  as  pd
@@ -16,9 +15,9 @@ class   info_groups:
         self.direct_groups  =   direct_groups
         self.direct_imagen_group    =   direct_imagen_group
 
-######################################################################
-###-------------------Definitions_functions------------------------###
-######################################################################
+    ######################################################################
+    ###-------------------Definitions_functions------------------------###
+    ######################################################################
 
     ###------------------------view_data_grups-------------------------###
     def view_table(self, direct, name):
@@ -138,7 +137,7 @@ class   info_groups:
 
     ###------------------------button_group_list-----------------------###
     def button_group_list(self):
-        
+
         def boton(name):
             boton   =   ft.TextButton(
                 content =   ft.Row([
@@ -147,8 +146,10 @@ class   info_groups:
                         str(name), size=25, text_align=ft.TextAlign.CENTER, 
                         color=self.color[6], font_family=self.font[1], weight=ft.FontWeight.BOLD
                     ),
-                ], alignment=ft.VerticalAlignment.START, spacing=10
-                )
+                ], 
+                alignment=ft.VerticalAlignment.START, spacing=10
+                ),
+                # on_click    =   lambda  e:  self.ref_variable(str(name))
             )
             return  boton
 
@@ -169,7 +170,7 @@ class   info_groups:
                 padding =   ft.padding.all(20),
                 alignment   =   ft.alignment.center, 
                 border_radius   =   15,
-                height  = 400   
+                height  = 400,
             )
 
         elif    len(lista)  !=  0:
@@ -186,12 +187,61 @@ class   info_groups:
 
         return  lista_groups
 
+
+    ######################################################################
+    ###-------------------Functions_graph_in_flet----------------------###
+    ######################################################################
+
     ###-------------------------init_menu_grups------------------------###
     def init_menu(self):
         cont    =   ft.Container(
             content =   ft.Column(
                 [self.baner_group(), self.button_group_list()], spacing=20)
             )
+        return  cont
+
+    ###-------------------------View_data_table------------------------###
+
+    def view_list(self, name_table):
+        boton   =   ft.Container(
+            content =   ft.Row([
+                ft.IconButton(ft.Icons.ARROW_BACK_IOS_OUTLINED, bgcolor=self.color[6]),
+                ft.TextButton(
+                    content =   ft.Text(
+                        str(name_table), 
+                        color   =   self.color[6], 
+                        weight  =   ft.FontWeight.BOLD, 
+                        italic  =   True,
+                        size    =   25,
+                        font_family =   self.font[1] 
+                    )
+                )
+            ])
+        )
+
+        tabla   =   ft.InteractiveViewer(
+            content =   self.view_table(self.direct_groups, name_table),
+            scale_enabled=True,
+            pan_enabled=True,
+            min_scale=0.1,
+            max_scale=100.0,
+            boundary_margin=ft.margin.all(300),
+        )
+
+        lista   =   [boton, tabla]
+        tabla_inferior  =   ft.Container(
+            content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
+            bgcolor =   self.color[1], 
+            border_radius   =   15, 
+            padding =   ft.padding.all(20),
+            height  = 400   
+        )        
+
+        cont    =   ft.Container(
+            content =   ft.Column(
+                [gp.baner_group(), tabla_inferior], spacing=20)
+        )
+
         return  cont
 
 
@@ -285,58 +335,11 @@ gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png
 
 ###--------------------export_contet_texting-----------------------###
 def main(page: ft.Page):
-    
-    boton   =   ft.Container(
-        content =   ft.Row([
-            ft.IconButton(ft.Icons.ARROW_BACK_IOS_OUTLINED, bgcolor=gp.color[6]),
-            ft.TextButton(
-                content =   ft.Text(
-                    str("saludo"), 
-                    color   =   gp.color[6], 
-                    weight  =   ft.FontWeight.BOLD, 
-                    italic  =   True,
-                    size    =   25,
-                    font_family =   gp.font[1] 
-                )
-            )
-        ])
-    )
-
-    tabla   =   ft.InteractiveViewer(
-        content =   gp.view_table(direct_texting,"group texting"),
-        scale_enabled=True,
-        pan_enabled=True,
-        min_scale=0.1,
-        max_scale=100.0,
-        boundary_margin=ft.margin.all(300),
-    )
-
-    def table():
-        lista   =   [boton, tabla]
-        cont    =   ft.Container(
-            content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
-            bgcolor =   gp.color[1], 
-            border_radius   =   15, 
-            padding =   ft.padding.all(20),
-            height  = 400   
-        )        
-        return  cont
-
-    def view_list():
-        cont    =   ft.Container(
-            content =   ft.Column(
-                [gp.baner_group(), table()], spacing=20)
-        )
-        return  cont
-
-
-
+  
     page.bgcolor    =   color[0]
     page.padding    =   20
-    # page.floating_action_button =   gp.button_new_group(None)
-    return  page.add(view_list())
-    # return  page.add(gp.init_menu())
+    page.floating_action_button =   gp.button_new_group(None)
+    return  page.add(gp.init_menu())
 
 ft.app(target=main)
-
 
