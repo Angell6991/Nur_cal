@@ -34,7 +34,7 @@ def main_menu(page: ft.Page):
             global  gp
             gp  =   group.info_groups(color, font, direct_list, f"{direct_imagen}/nur_black.png")
             gp.page =   page
-            gp.init_menu(menu_navegation)
+            content=gp.init_menu(menu_navegation)
 
         elif    selected_index  ==  1:
             mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, "storage/data/logo.png")

@@ -1,4 +1,4 @@
-import  modules.data_list   as  data
+# import  modules.data_list   as  data
 
 import  pandas  as  pd
 import  flet    as  ft
@@ -103,7 +103,7 @@ class   info_groups:
         boton   =   ft.FloatingActionButton(
             on_click    =   action, 
             icon        =   ft.Icons.ADD,
-            bgcolor     =   self.color[8],
+            bgcolor     =   self.color[4],
             foreground_color    =   self.color[0],
         )
         return  boton
@@ -151,7 +151,6 @@ class   info_groups:
                 alignment=ft.VerticalAlignment.START, spacing=10
                 ),
                 on_click    =   lambda  e:  self.view_list(name, menu_navegation)
-                # on_click    =   lambda  e:  self.ref_variable(str(name))
             )
             return  boton
 
@@ -172,19 +171,24 @@ class   info_groups:
                 padding =   ft.padding.all(20),
                 alignment   =   ft.alignment.center, 
                 border_radius   =   15,
-                height  = 400,
+                height  = 4000,
             )
 
         elif    len(lista)  !=  0:
             lista   =   [filename.replace(".dat", "") for filename in lista]    
             lista   =   [boton(i) for i in lista]
-            lista_groups    =   ft.Container(
+
+            lista_00    =   ft.Container(
                 content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
+                height  = 700 
+            )
+
+            lista_groups    =   ft.Container(
+                content=ft.Column([lista_00]),
                 bgcolor =   self.color[1], 
                 border_radius   =   15, 
                 padding =   ft.padding.all(20),
-                height  = 400   
-                # border  =   ft.border.all(2, color[3]),
+                height  = 4000 
             )
 
         return  lista_groups
@@ -202,6 +206,7 @@ class   info_groups:
             )
 
         self.page.controls.clear()
+        self.page.vertical_alignment     =   ft.MainAxisAlignment.START  
         self.page.add(cont, menu_navegation)
         self.page.floating_action_button =   self.button_new_group(None)
         return  self.page.update()
@@ -245,7 +250,7 @@ class   info_groups:
             bgcolor =   self.color[1], 
             border_radius   =   15, 
             padding =   ft.padding.all(20),
-            height  = 400   
+            height  = 4000   
         )        
 
         cont    =   ft.Container(
@@ -257,77 +262,6 @@ class   info_groups:
         self.page.floating_action_button =   None
         self.page.add(cont)
         return  self.page.update()
-
-
-
-######################################################################
-###-------------------------graph_in_flet--------------------------###
-######################################################################
-# def edit_list(page: ft.Page):
-
-#     ###---------funcion_para_guardar_name_goups_y_number_players-------###
-#     def new_list(e):
-        
-#         names   =   []
-#         atribut =   []
-        
-#         def save_and_exit(e):
-
-#             page.controls.clear()
-#             page.floating_action_button     =   button_new_group(new_list)
-#             page.add(graph)
-#             data.new_list(direct_texting, str(name_group.value), names, atribut)
-#             return  page.update()
-
-#         def save_players(e):
-            
-#             def save_data(e):
-#                 nonlocal names, atribut
-#                 names.append(name.value)
-#                 atribut.append([int(life.value), int(damage.value), int(dodge.value), int(attack.value), int(dices.value)])
-#                 save_players(e)
-
-#             name    =   input_box("Name player")
-#             life    =   input_box("Life")
-#             damage  =   input_box("Damage")
-#             dodge   =   input_box("Dodge")
-#             attack  =   input_box("Attack")
-#             dices   =   input_box("Dices")
-#             button_save     =   ft.Row(
-#                 controls    =   [button_icon(save_and_exit, "Save group exit", ft.Icons.SAVE), 
-#                                  button_icon(save_data, "Save player", ft.Icons.GROUP_ADD)],
-#                 alignment   =   ft.MainAxisAlignment.CENTER,  
-#             )
-
-#             ###------------------------Dibujando_en_flet-----------------------###
-#             page.controls.clear()
-#             page.add(name, life, damage, dodge, attack, dices, button_save)
-#             return  page.update()
-
-#         name_group      =   input_box("Name group")
-#         button_next     =   ft.Row(
-#             controls    =   [button_icon(save_players, "Save and intro players", ft.Icons.SAVE_ALT)],
-#             alignment   =   ft.MainAxisAlignment.CENTER,  
-#         )
-
-#         ###------------------------Dibujando_en_flet-----------------------###
-#         page.floating_action_button =   None
-#         page.controls.clear()
-#         page.add(name_group, button_next)
-#         return page.update()
-
-#     ###------------------------Dibujando_en_flet-----------------------###
-#     graph   =   view_table(direct_texting, "group texting")
-#     page.bgcolor    =   color[0]
-#     page.padding    =   20
-#     page.scroll     =   ft.ScrollMode.HIDDEN
-#     page.floating_action_button     =   button_new_group(new_list)
-#     return  page.add(graph) 
-
-###------------------------Texting_pogram--------------------------###
-# ft.app(target=edit_list)
-
-
 
 ######################################################################
 ###-------------------------Texting_pogram-------------------------###
@@ -355,7 +289,7 @@ class   info_groups:
 
 #     page.bgcolor    =   color[0]
 #     page.padding    =   20
-#     return  gp.init_menu()
+#     return  page.add(ft.Text(" "))
 
 # ft.app(target=main)
 
