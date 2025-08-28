@@ -14,6 +14,7 @@ class   info_groups:
         self.font   =   font
         self.direct_groups  =   direct_groups
         self.direct_imagen_group    =   direct_imagen_group
+        self.page   =   None
 
     ######################################################################
     ###-------------------Definitions_functions------------------------###
@@ -149,6 +150,7 @@ class   info_groups:
                 ], 
                 alignment=ft.VerticalAlignment.START, spacing=10
                 ),
+                on_click    =   lambda  e:  self.view_list(name)
                 # on_click    =   lambda  e:  self.ref_variable(str(name))
             )
             return  boton
@@ -198,14 +200,22 @@ class   info_groups:
             content =   ft.Column(
                 [self.baner_group(), self.button_group_list()], spacing=20)
             )
-        return  cont
+
+        self.page.controls.clear()
+        self.page.add(cont)
+        self.page.floating_action_button =   gp.button_new_group(None)
+        return  self.page.update()
 
     ###-------------------------View_data_table------------------------###
 
     def view_list(self, name_table):
         boton   =   ft.Container(
             content =   ft.Row([
-                ft.IconButton(ft.Icons.ARROW_BACK_IOS_OUTLINED, bgcolor=self.color[6]),
+                ft.IconButton(
+                    ft.Icons.ARROW_BACK_IOS_OUTLINED, 
+                    bgcolor=self.color[6],
+                    on_click    =   lambda  e:  self.init_menu()
+                ),
                 ft.TextButton(
                     content =   ft.Text(
                         str(name_table), 
@@ -213,8 +223,9 @@ class   info_groups:
                         weight  =   ft.FontWeight.BOLD, 
                         italic  =   True,
                         size    =   25,
-                        font_family =   self.font[1] 
-                    )
+                        font_family =   self.font[1],
+                    ),
+                    on_click    =   lambda  e:  self.init_menu()
                 )
             ])
         )
@@ -241,8 +252,11 @@ class   info_groups:
             content =   ft.Column(
                 [gp.baner_group(), tabla_inferior], spacing=20)
         )
-
-        return  cont
+        
+        self.page.controls.clear()
+        self.page.floating_action_button =   None
+        self.page.add(cont)
+        return  self.page.update()
 
 
 
@@ -331,15 +345,17 @@ color   =   [
 ]
 
 font    =   ["Noto Serif Display", "Noto Sans"]
-gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
 
 ###--------------------export_contet_texting-----------------------###
 def main(page: ft.Page):
-  
+
+    global  gp
+    gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
+    gp.page =   page
+
     page.bgcolor    =   color[0]
     page.padding    =   20
-    page.floating_action_button =   gp.button_new_group(None)
-    return  page.add(gp.init_menu())
+    return  gp.init_menu()
 
 ft.app(target=main)
 
