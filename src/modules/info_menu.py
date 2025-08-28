@@ -8,6 +8,8 @@ class   info_menu:
     def __init__ (self, color_title, color_text, color_git, color_blog, font, dir_imagen):
 
         ###-------------------contenido_del_tab--------------###
+        self.page   =   None
+
         self.name_app    =   ft.Text(
             "Nur Calculator", 
             size    =   "50", 
@@ -46,5 +48,15 @@ class   info_menu:
             spacing     =   5,  
             alignment   =   ft.MainAxisAlignment.CENTER,  
         )
+        
+    ########################################################
+    ###------------------Main_menu_flet------------------###
+    ########################################################
+    def main_menu(self, menu_navegation):
+        self.page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
+        self.page.vertical_alignment     =   ft.MainAxisAlignment.CENTER  
+        self.page.floating_action_button =   None
+        self.page.add(self.name_app, self.imagen, self.texto, self.botones_en_fila, menu_navegation)
+        return  self.page.update()
 
 

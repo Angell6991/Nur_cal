@@ -137,7 +137,7 @@ class   info_groups:
         return  boton
 
     ###------------------------button_group_list-----------------------###
-    def button_group_list(self):
+    def button_group_list(self, menu_navegation):
 
         def boton(name):
             boton   =   ft.TextButton(
@@ -150,7 +150,7 @@ class   info_groups:
                 ], 
                 alignment=ft.VerticalAlignment.START, spacing=10
                 ),
-                on_click    =   lambda  e:  self.view_list(name)
+                on_click    =   lambda  e:  self.view_list(name, menu_navegation)
                 # on_click    =   lambda  e:  self.ref_variable(str(name))
             )
             return  boton
@@ -195,26 +195,26 @@ class   info_groups:
     ######################################################################
 
     ###-------------------------init_menu_grups------------------------###
-    def init_menu(self):
+    def init_menu(self, menu_navegation):
         cont    =   ft.Container(
             content =   ft.Column(
-                [self.baner_group(), self.button_group_list()], spacing=20)
+                [self.baner_group(), self.button_group_list(menu_navegation)], spacing=20)
             )
 
         self.page.controls.clear()
-        self.page.add(cont)
-        self.page.floating_action_button =   gp.button_new_group(None)
+        self.page.add(cont, menu_navegation)
+        self.page.floating_action_button =   self.button_new_group(None)
         return  self.page.update()
 
     ###-------------------------View_data_table------------------------###
 
-    def view_list(self, name_table):
+    def view_list(self, name_table, menu_navegation):
         boton   =   ft.Container(
             content =   ft.Row([
                 ft.IconButton(
                     ft.Icons.ARROW_BACK_IOS_OUTLINED, 
                     bgcolor=self.color[6],
-                    on_click    =   lambda  e:  self.init_menu()
+                    on_click    =   lambda  e:  self.init_menu(menu_navegation)
                 ),
                 ft.TextButton(
                     content =   ft.Text(
@@ -225,7 +225,7 @@ class   info_groups:
                         size    =   25,
                         font_family =   self.font[1],
                     ),
-                    on_click    =   lambda  e:  self.init_menu()
+                    on_click    =   lambda  e:  self.init_menu(menu_navegation)
                 )
             ])
         )
@@ -250,7 +250,7 @@ class   info_groups:
 
         cont    =   ft.Container(
             content =   ft.Column(
-                [gp.baner_group(), tabla_inferior], spacing=20)
+                [self.baner_group(), tabla_inferior], spacing=20)
         )
         
         self.page.controls.clear()
@@ -332,30 +332,30 @@ class   info_groups:
 ######################################################################
 ###-------------------------Texting_pogram-------------------------###
 ######################################################################
-os.system("clear")
+# os.system("clear")
 
-direct_imagen   =   os.path.join("..", "storage/data")
-direct_texting  =   os.path.join("..", "storage/data/list")
-contenido       =   os.listdir(direct_texting)
+# direct_imagen   =   os.path.join("..", "storage/data")
+# direct_texting  =   os.path.join("..", "storage/data/list")
+# contenido       =   os.listdir(direct_texting)
 
-color   =   [
-    "#045060", "#033742", "#0790AD", "#6DDEF7",
-    "#FF9442", "#DD6C86", "#e2e2e2", "#2e2e2e",
-    "#9FDFED"
-]
+# color   =   [
+#     "#045060", "#033742", "#0790AD", "#6DDEF7",
+#     "#FF9442", "#DD6C86", "#e2e2e2", "#2e2e2e",
+#     "#9FDFED"
+# ]
 
-font    =   ["Noto Serif Display", "Noto Sans"]
+# font    =   ["Noto Serif Display", "Noto Sans"]
 
-###--------------------export_contet_texting-----------------------###
-def main(page: ft.Page):
+# ###--------------------export_contet_texting-----------------------###
+# def main(page: ft.Page):
 
-    global  gp
-    gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
-    gp.page =   page
+#     global  gp
+#     gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
+#     gp.page =   page
 
-    page.bgcolor    =   color[0]
-    page.padding    =   20
-    return  gp.init_menu()
+#     page.bgcolor    =   color[0]
+#     page.padding    =   20
+#     return  gp.init_menu()
 
-ft.app(target=main)
+# ft.app(target=main)
 

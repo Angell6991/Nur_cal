@@ -1,4 +1,5 @@
 import  modules.info_menu   as  menu
+import  modules.info_groups as  group
 
 import  flet    as  ft
 from    flet    import  Icons
@@ -14,6 +15,9 @@ color   =   [
 
 font    =   ["Noto Serif Display", "Noto Sans"]
 
+direct_imagen   =   "storage/data"
+direct_list     =   "storage/data/list"
+
 ########################################################
 ###------------------Main_menu_flet------------------###
 ########################################################
@@ -27,17 +31,18 @@ def main_menu(page: ft.Page):
         page.controls.clear()
 
         if  selected_index  ==  0:
-            page.add(
-                ft.Text("mi primera app en flet"), 
-                menu_navegation
-            )
+            global  gp
+            gp  =   group.info_groups(color, font, direct_list, f"{direct_imagen}/nur_black.png")
+            gp.page =   page
+            gp.init_menu(menu_navegation)
 
         elif    selected_index  ==  1:
-            page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
-            page.vertical_alignment     =   ft.MainAxisAlignment.CENTER  
-            page.add(mn.name_app, mn.imagen, mn.texto, mn.botones_en_fila, menu_navegation)
+            mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, "storage/data/logo.png")
+            mn.page =   page
+            mn.main_menu(menu_navegation)
 
         elif    selected_index  ==  2:
+            page.floating_action_button =   None
             page.add(
                 ft.Text("Menu de pruevas"), 
                 menu_navegation
@@ -48,7 +53,8 @@ def main_menu(page: ft.Page):
 
     ###-------------import_module_info_menu--------------###
     mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, "storage/data/logo.png")
-
+    mn.page =   page
+    
     ###---------construyendo_menu_de_navegacion----------###
     menu_navegation     =   ft.NavigationBar(
         
@@ -82,9 +88,9 @@ def main_menu(page: ft.Page):
     page.padding    =   20
     page.bgcolor    =   color[0]
     page.theme_mode =   "LIGHT"
-    page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
-    page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
-    return  page.add(mn.name_app, mn.imagen, mn.texto, mn.botones_en_fila, menu_navegation)
+    # page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
+    # page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
+    return  mn.main_menu(menu_navegation)
 
 ###-----------------Start_app_in_FLET----------------###
 ft.app(target=main_menu)
