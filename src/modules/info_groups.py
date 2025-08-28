@@ -88,6 +88,7 @@ class   info_groups:
         box     =   ft.Row(
             controls    =   [imagen, texto],
             spacing     =   40,
+            alignment   =   ft.MainAxisAlignment.START,
         )
         cont    =   ft.Container(
             content =   box, 
@@ -202,8 +203,9 @@ class   info_groups:
     def init_menu(self, menu_navegation):
         cont    =   ft.Container(
             content =   ft.Column(
-                [self.baner_group(), self.button_group_list(menu_navegation)], spacing=20)
+                [self.baner_group(), self.button_group_list(menu_navegation)], spacing=20
             )
+        )
 
         self.page.controls.clear()
         self.page.vertical_alignment     =   ft.MainAxisAlignment.START  
@@ -260,7 +262,7 @@ class   info_groups:
         
         self.page.controls.clear()
         self.page.floating_action_button =   None
-        self.page.add(cont)
+        self.page.add(cont, menu_navegation)
         return  self.page.update()
 
 ######################################################################
