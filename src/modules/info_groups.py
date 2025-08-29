@@ -38,7 +38,7 @@ class   info_groups:
             heading_row_height  =   35,
             divider_thickness   =   0,
             column_spacing      =   22,
-
+            
             columns =   [
                 ft.DataColumn(
                     ft.Text(str(col), color=self.color[7], font_family=self.font[1], weight=ft.FontWeight.BOLD, italic=True)
@@ -217,35 +217,36 @@ class   info_groups:
 
     def view_list(self, name_table, menu_navegation):
         boton   =   ft.Container(
-            content =   ft.Row([
-                ft.IconButton(
-                    ft.Icons.ARROW_BACK_IOS_OUTLINED, 
-                    bgcolor=self.color[6],
-                    on_click    =   lambda  e:  self.init_menu(menu_navegation)
-                ),
-                ft.TextButton(
-                    content =   ft.Text(
-                        str(name_table), 
-                        color   =   self.color[6], 
-                        weight  =   ft.FontWeight.BOLD, 
-                        italic  =   True,
-                        size    =   25,
-                        font_family =   self.font[1],
+            content =   ft.Row(
+                [
+                    ft.IconButton(
+                        ft.Icons.ARROW_BACK_IOS_OUTLINED, 
+                        bgcolor=self.color[6],
+                        on_click    =   lambda  e:  self.init_menu(menu_navegation)
                     ),
-                    on_click    =   lambda  e:  self.init_menu(menu_navegation)
-                )
-            ])
+                    ft.TextButton(
+                        content =   ft.Text(
+                            str(name_table), 
+                            color   =   self.color[6], 
+                            weight  =   ft.FontWeight.BOLD, 
+                            italic  =   True,
+                            size    =   25,
+                            font_family =   self.font[1],
+                        ),
+                        on_click    =   lambda  e:  self.init_menu(menu_navegation)
+                    ),
+                    ft.IconButton(
+                        ft.Icons.SETTINGS, 
+                        bgcolor=self.color[6],
+                        # on_click    =   lambda  e:  self.init_menu(menu_navegation)
+                    ),
+                ],
+                alignment   =   ft.MainAxisAlignment.SPACE_BETWEEN,
+            ),
         )
-
-        tabla   =   ft.InteractiveViewer(
-            content =   self.view_table(self.direct_groups, name_table),
-            scale_enabled=True,
-            pan_enabled=True,
-            min_scale=0.1,
-            max_scale=100.0,
-            boundary_margin=ft.margin.all(300),
-        )
-
+       
+        tabla   =   ft.Row([self.view_table(self.direct_groups, name_table)] ,scroll="always")
+        
         lista   =   [boton, tabla]
         tabla_inferior  =   ft.Container(
             content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
