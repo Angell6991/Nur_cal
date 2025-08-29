@@ -60,8 +60,8 @@ class   info_groups:
         
         intro_text  =   ft.TextField(
             label   =   str(intro), 
-            color   =   self.color[7], 
-            bgcolor =   self.color[8], 
+            color   =   self.color[6], 
+            bgcolor =   self.color[0], 
             label_style =   ft.TextStyle(color=self.color[6]),
             border_color    =   self.color[6], 
             border_radius   =   10,
@@ -70,7 +70,7 @@ class   info_groups:
             cursor_height   =   20,
             cursor_radius   =   10,
             cursor_width    =   1,
-            selection_color =   self.color[0],
+            selection_color =   self.color[1],
         )
         return  intro_text
 
@@ -99,10 +99,10 @@ class   info_groups:
         return  cont
 
     ###----------------------button_crated_group-----------------------###
-    def button_new_group(self, action):
+    def button_new_group(self, menu_navegation):
         
         boton   =   ft.FloatingActionButton(
-            on_click    =   action, 
+            on_click    =   lambda  e: self.intro_new_group(menu_navegation), 
             icon        =   ft.Icons.ADD,
             bgcolor     =   self.color[4],
             foreground_color    =   self.color[0],
@@ -115,12 +115,12 @@ class   info_groups:
         boton   =   ft.FilledButton(
             content =   ft.Row([
                 ft.Icon(icono, size=20),
-                ft.Text(str(label), size=15, text_align=ft.TextAlign.CENTER),
+                ft.Text(str(label), size=17, text_align=ft.TextAlign.CENTER),
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=8
             ),
             on_click=   action,
             color   =   self.color[0],
-            bgcolor =   self.color[5],
+            bgcolor =   self.color[3],
             style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28)),
         )
         return  boton
@@ -210,11 +210,10 @@ class   info_groups:
         self.page.controls.clear()
         self.page.vertical_alignment     =   ft.MainAxisAlignment.START  
         self.page.add(cont, menu_navegation)
-        self.page.floating_action_button =   self.button_new_group(None)
+        self.page.floating_action_button =   self.button_new_group(menu_navegation)
         return  self.page.update()
 
     ###-------------------------View_data_table------------------------###
-
     def view_list(self, name_table, menu_navegation):
         boton   =   ft.Container(
             content =   ft.Row(
@@ -265,6 +264,46 @@ class   info_groups:
         self.page.floating_action_button =   None
         self.page.add(cont, menu_navegation)
         return  self.page.update()
+
+    ###-------------------------intro_new_group------------------------###
+    def intro_new_group(self, menu_navegation):
+        
+        texto   =   ft.Text(
+            "Enter the name for the new group: ", 
+            size    =   20,
+            color   =   self.color[6],
+            font_family =   self.font[1],
+        )
+
+        intro_name  =   self.input_box("Name")   
+        boton   =   self.button_icon(None, "Next", ft.Icons.SAVE_AS)
+
+        boton_container =   ft.Container(
+            ft.Row(
+                [ft.Container(boton, width=100)],
+                alignment   =   ft.MainAxisAlignment.CENTER,
+            )
+        )
+
+        lista   =   [texto, intro_name, boton_container]
+        tabla_inferior  =   ft.Container(
+            content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN, spacing=20),
+            bgcolor =   self.color[1], 
+            border_radius   =   15, 
+            padding =   ft.padding.all(20),
+            height  = 4000   
+        )        
+
+        cont    =   ft.Container(
+            content =   ft.Column(
+                [self.baner_group(), tabla_inferior], spacing=20)
+        )
+        
+        self.page.controls.clear()
+        self.page.floating_action_button =   None
+        self.page.add(cont, menu_navegation)
+        return  self.page.update()
+
 
 ######################################################################
 ###-------------------------Texting_pogram-------------------------###
