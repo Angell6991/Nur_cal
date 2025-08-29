@@ -114,7 +114,7 @@ class   info_groups:
         
         boton   =   ft.FilledButton(
             content =   ft.Row([
-                ft.Icon(icono, size=20),
+                ft.Icon(icono, size=20, color=self.color[0]),
                 ft.Text(str(label), size=17, text_align=ft.TextAlign.CENTER),
             ], alignment=ft.MainAxisAlignment.CENTER, spacing=8
             ),
