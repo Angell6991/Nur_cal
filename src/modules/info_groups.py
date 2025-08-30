@@ -1,4 +1,4 @@
-# import  modules.data_list   as  data
+import  modules.data_list   as  data
 
 import  pandas  as  pd
 import  flet    as  ft
@@ -17,6 +17,10 @@ class   info_groups:
         self.direct_imagen_player_01    =   direct_imagen_player_01
         self.direct_imagen_player_02    =   direct_imagen_player_02
         self.page   =   None
+
+        ###----------------define_variables_para_crear_listas--------------###
+        self.name_player    =   []
+        self.data_list      =   []
 
     ######################################################################
     ###-------------------Definitions_functions------------------------###
@@ -197,7 +201,35 @@ class   info_groups:
         return  lista_groups
 
     ###------------------------intro_data_player-----------------------###
-    def intro_data_player(self):
+    def intro_data_player(self, name_group, menu_navegation):
+
+        ###---------------------definitions_functions----------------------###
+        def save_exit(e):
+            data.new_list(self.direct_groups, name_group, self.name_player, self.data_list)
+            return  self.init_menu(menu_navegation)
+
+        def save_player(e):
+            # self.name_player.append(info_player[0].value)
+            # self.data_list.append([
+            #     int(info_player[2].value), 
+            #     int(info_player[3].value), 
+            #     int(info_player[4].value), 
+            #     int(info_player[5].value),
+            #     int(info_player[6].value)
+            # ])
+            # return self.intro_data_player(name_group, menu_navegation)  
+            
+            self.name_player.append(info_player[0].value)
+            valores = []
+            indices = [2, 3, 4, 5, 6] 
+            for i in indices:
+                try:
+                    valores.append(int(info_player[i].value))
+                except (ValueError, TypeError):
+                    valores.append(0)  # valor predeterminado
+            
+            self.data_list.append(valores)
+            return self.intro_data_player(name_group, menu_navegation)
 
         ###----------------------contenedor_superior-----------------------###
         imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=170)
@@ -239,8 +271,8 @@ class   info_groups:
         )
        
         ###-----------------------contenedor_inferior----------------------###
-        boton_01    =   self.button_icon(None, "Save group and exit", ft.Icons.SAVE)
-        boton_02    =   self.button_icon(None, "Enter another player", ft.Icons.GROUP_ADD)
+        boton_01    =   self.button_icon(save_exit, "Save group and exit", ft.Icons.SAVE)
+        boton_02    =   self.button_icon(save_player, "Enter another player", ft.Icons.GROUP_ADD)
         contenedor_03   =   ft.Container(
             ft.Row(
                 [boton_01, boton_02], 
@@ -264,6 +296,11 @@ class   info_groups:
 
     ###-------------------------init_menu_grups------------------------###
     def init_menu(self, menu_navegation):
+
+        ###----------reseteo_de_variables_globales_para_las_listas---------###
+        self.name_player    =   []
+        self.data_list      =   []
+
         cont    =   ft.Container(
             content =   ft.Column(
                 [self.baner_group(), self.button_group_list(menu_navegation)], spacing=20
@@ -339,7 +376,7 @@ class   info_groups:
         )
 
         intro_name  =   self.input_box("Name")   
-        boton   =   self.button_icon(lambda e: self.intro_data_player(), "Next", ft.Icons.SAVE_AS)
+        boton   =   self.button_icon(lambda e: self.intro_data_player(intro_name.value, menu_navegation), "Next", ft.Icons.SAVE_AS)
 
         boton_container =   ft.Container(
             ft.Row(
