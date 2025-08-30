@@ -9,11 +9,13 @@ import  os
 ######################################################################
 class   info_groups:
 
-    def __init__(self, color, font, direct_groups, direct_imagen_group):
+    def __init__(self, color, font, direct_groups, direct_imagen_group, direct_imagen_player_01, direct_imagen_player_02):
         self.color  =   color
         self.font   =   font
         self.direct_groups  =   direct_groups
         self.direct_imagen_group    =   direct_imagen_group
+        self.direct_imagen_player_01    =   direct_imagen_player_01
+        self.direct_imagen_player_02    =   direct_imagen_player_02
         self.page   =   None
 
     ######################################################################
@@ -194,6 +196,67 @@ class   info_groups:
 
         return  lista_groups
 
+    ###------------------------intro_data_player-----------------------###
+    def intro_data_player(self):
+
+        ###----------------------contenedor_superior-----------------------###
+        imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=170)
+        texto_title =   ft.Text(
+            "Enter a player \n to the group", 
+            size    =   25,
+            color   =   self.color[0],
+            weight  =   ft.FontWeight.BOLD,
+            italic  =   True,
+            font_family =   self.font[0],
+            text_align  =   ft.TextAlign.START,
+        )
+        contenedor_01   =   ft.Container(
+            content =   ft.Row(controls=[imag_title, texto_title], alignment=ft.MainAxisAlignment.START, spacing=50),
+            bgcolor =   self.color[6],
+            border_radius   =   15,
+            padding =   ft.padding.all(20) 
+        )
+
+        ###------------------------contenedor_medio------------------------###
+        imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
+        info_player =   [
+            self.input_box("Name"),
+            ft.Divider(),
+            self.input_box("Life"),
+            self.input_box("Damage"),
+            self.input_box("Dodge"),
+            self.input_box("Attack"),
+            self.input_box("Dices"),
+        ]
+        contenedor_02   =   ft.Container(
+            ft.Row(
+                [
+                    ft.Container(ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), bgcolor=self.color[0], height=400),
+                    ft.Container(ft.Column(info_player), bgcolor=self.color[1], padding=ft.padding.all(20), border_radius=15) 
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+            )
+        )
+       
+        ###-----------------------contenedor_inferior----------------------###
+        boton_01    =   self.button_icon(None, "Save group and exit", ft.Icons.SAVE)
+        boton_02    =   self.button_icon(None, "Enter another player", ft.Icons.GROUP_ADD)
+        contenedor_03   =   ft.Container(
+            ft.Row(
+                [boton_01, boton_02], 
+                alignment=ft.MainAxisAlignment.SPACE_EVENLY
+            ), 
+            padding=20, 
+            bgcolor=self.color[1],
+            border_radius=15
+        )
+
+        ###----------------------contenedor_principal----------------------###
+        contenedor_main =   ft.Container(ft.Column([contenedor_01, contenedor_02, contenedor_03], spacing=20))
+        
+        self.page.controls.clear()
+        self.page.add(contenedor_main)
+        return  self.page.update()
 
     ######################################################################
     ###-------------------Functions_graph_in_flet----------------------###
@@ -276,7 +339,7 @@ class   info_groups:
         )
 
         intro_name  =   self.input_box("Name")   
-        boton   =   self.button_icon(None, "Next", ft.Icons.SAVE_AS)
+        boton   =   self.button_icon(lambda e: self.intro_data_player(), "Next", ft.Icons.SAVE_AS)
 
         boton_container =   ft.Container(
             ft.Row(
@@ -328,10 +391,10 @@ class   info_groups:
 #     global  gp
 #     gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
 #     gp.page =   page
-
+    
 #     page.bgcolor    =   color[0]
 #     page.padding    =   20
-#     return  page.add(ft.Text(" "))
+#     return  page.add()
 
 # ft.app(target=main)
 

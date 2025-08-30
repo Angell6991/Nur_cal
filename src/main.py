@@ -32,7 +32,14 @@ def main_menu(page: ft.Page):
 
         if  selected_index  ==  0:
             global  gp
-            gp  =   group.info_groups(color, font, direct_list, f"{direct_imagen}/nur_black.png")
+            gp  =   group.info_groups(
+                color, 
+                font, 
+                direct_list, 
+                f"{direct_imagen}/nur_black.png",
+                f"{direct_imagen}/nur_blue.png",
+                f"{direct_imagen}/logo_03.png",
+            )
             gp.page =   page
             content=gp.init_menu(menu_navegation)
 
