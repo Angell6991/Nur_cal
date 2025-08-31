@@ -337,7 +337,7 @@ class   info_groups:
                     ft.IconButton(
                         ft.Icons.SETTINGS, 
                         bgcolor=self.color[6],
-                        # on_click    =   lambda  e:  self.init_menu(menu_navegation)
+                        on_click    =   lambda  e:  self.setting_group(name_table, menu_navegation)
                     ),
                 ],
                 alignment   =   ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -404,6 +404,97 @@ class   info_groups:
         self.page.add(cont, menu_navegation)
         return  self.page.update()
 
+    ###-------------------------settings_group-------------------------###
+    def setting_group(self, name_group, menu_navegation):
+        boton_back  =   ft.IconButton(
+            ft.Icons.ARROW_BACK_IOS_OUTLINED, 
+            bgcolor =   self.color[6],
+            icon_size   =   40,
+            on_click    =    lambda e:   self.view_list(name_group, menu_navegation) 
+        )
+        texto_title =   ft.Text(
+            "Group settings",
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   50,
+            font_family =   self.font[0],
+        )
+        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=20))
+        texto_secondary =   ft.Text(
+            str(name_group),
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   25,
+            font_family =   self.font[1],
+        )
+        boton_app_player    =   ft.TextButton(
+            content =   ft.Text(
+                "App player", 
+                color   =   self.color[6], 
+                weight  =   ft.FontWeight.BOLD, 
+                size    =   20,
+                font_family =   self.font[1],
+            )
+        )
+        boton_edit_player   =   ft.TextButton(
+            content =   ft.Text(        
+                "Edit player",
+                color   =   self.color[6], 
+                weight  =   ft.FontWeight.BOLD, 
+                size    =   20,
+                font_family =   self.font[1],       
+            )
+        )
+        boton_remove_player =   ft.TextButton(
+            content =   ft.Text(
+                "Remove player",
+                color   =   self.color[6], 
+                weight  =   ft.FontWeight.BOLD, 
+                size    =   20,
+                font_family =   self.font[1],
+            )
+        )
+        boton_copy_group    =   ft.TextButton(
+            content =   ft.Text(
+                "Copy group",
+                color   =   self.color[6], 
+                weight  =   ft.FontWeight.BOLD, 
+                size    =   20,
+                font_family =   self.font[1],
+            )
+        )
+        boton_delete_group    =   ft.TextButton(
+            content =   ft.Text(
+                "Delete group",
+                color   =   self.color[5], 
+                weight  =   ft.FontWeight.BOLD, 
+                size    =   20,
+                font_family =   self.font[1],
+            )
+        )
+        divisor =   ft.Divider()
+        box =   ft.Container(
+            content =   ft.Column(
+                spacing =   15,
+                controls    =   [
+                    title,
+                    texto_secondary,
+                    divisor,
+                    boton_app_player,
+                    boton_edit_player,
+                    boton_remove_player,
+                    boton_copy_group,
+                    divisor,
+                    boton_delete_group,
+                ]
+            )
+        )
+        self.page.controls.clear()
+        self.page.add(box)
+        return  self.page.update()
+
 
 ######################################################################
 ###-------------------------Texting_pogram-------------------------###
@@ -426,12 +517,20 @@ class   info_groups:
 # def main(page: ft.Page):
 
 #     global  gp
-#     gp  =   info_groups(color, font, direct_texting, f"{direct_imagen}/nur_black.png")
+#     gp  =   info_groups(
+#         color, 
+#         font, 
+#         direct_texting, 
+#         f"{direct_imagen}/nur_black.png", 
+#         f"{direct_imagen}/nur_black.png", 
+#         f"{direct_imagen}/nur_black.png"
+#     )
 #     gp.page =   page
     
 #     page.bgcolor    =   color[0]
 #     page.padding    =   20
-#     return  page.add()
+    
+#     return  add()
 
 # ft.app(target=main)
 
