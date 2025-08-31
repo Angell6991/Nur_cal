@@ -290,6 +290,11 @@ class   info_groups:
         self.page.add(contenedor_main)
         return  self.page.update()
 
+    ###--------------------------Delete_group--------------------------###
+    def delet_group(self, name, menu_navegation):
+        data.remove_list(self.direct_groups, name)
+        return  self.init_menu(menu_navegation) 
+
     ######################################################################
     ###-------------------Functions_graph_in_flet----------------------###
     ######################################################################
@@ -466,6 +471,7 @@ class   info_groups:
             )
         )
         boton_delete_group    =   ft.TextButton(
+            on_click    =   lambda e:   self.delet_group(name_group, menu_navegation),
             content =   ft.Text(
                 "Delete group",
                 color   =   self.color[5], 
