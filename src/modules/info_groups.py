@@ -326,6 +326,63 @@ class   info_groups:
         self.page.add(box)
         return  self.page.update()
 
+    ###-------------------------Delete_players-------------------------###
+    def delete_players(self, name_list, menu_navegation):
+
+        def delete(player_name):
+            data.remove_player(self.direct_groups, name_list, player_name)
+            return  self.delete_players(name_list, menu_navegation)
+
+        def boton(player_name):
+            boton   =   ft.TextButton(
+                on_click    =   lambda e:   delete(player_name),
+                content =   ft.Text(
+                    f"{player_name}",
+                    color   =   self.color[6], 
+                    weight  =   ft.FontWeight.BOLD, 
+                    size    =   20,
+                    font_family =   self.font[1],
+                )
+            )
+            return  boton
+
+        tabla   =   pd.read_csv(f"{self.direct_groups}/{name_list}.dat", sep=r"\s+")
+        name_player =   tabla.columns.tolist()
+        name_player =   name_player[1:-1]
+
+        boton_back  =   ft.IconButton(
+            ft.Icons.ARROW_BACK_IOS_OUTLINED, 
+            bgcolor =   self.color[6],
+            icon_size   =   40,
+            on_click    =    lambda e:   self.setting_group(name_list, menu_navegation) 
+        )
+        texto_title =   ft.Text(
+            "Select Player to Delete",
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   40,
+            font_family =   self.font[0],
+        )
+        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=20))
+        texto_secondary =   ft.Text(
+            str(name_list),
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   25,
+            font_family =   self.font[1],
+        )
+        
+        box =   ft.Container(
+            content =   ft.Column([boton(name)  for name in  name_player], scroll="always"),
+            height  =   700
+        )
+
+        self.page.controls.clear()
+        self.page.horizontal_alignment =   ft.MainAxisAlignment.START  
+        self.page.add(title, texto_secondary, ft.Divider(), box)
+        return  self.page.update()
 
 
     ######################################################################
@@ -486,6 +543,7 @@ class   info_groups:
             )
         )
         boton_remove_player =   ft.TextButton(
+            on_click    =   lambda e:   self.delete_players(name_group, menu_navegation),
             content =   ft.Text(
                 "Remove player",
                 color   =   self.color[6], 
@@ -535,42 +593,4 @@ class   info_groups:
         self.page.add(box)
         return  self.page.update()
 
-
-######################################################################
-###-------------------------Texting_pogram-------------------------###
-######################################################################
-# os.system("clear")
-
-# direct_imagen   =   os.path.join("..", "storage/data")
-# direct_texting  =   os.path.join("..", "storage/data/list")
-# contenido       =   os.listdir(direct_texting)
-
-# color   =   [
-#     "#045060", "#033742", "#0790AD", "#6DDEF7",
-#     "#FF9442", "#DD6C86", "#e2e2e2", "#2e2e2e",
-#     "#9FDFED"
-# ]
-
-# font    =   ["Noto Serif Display", "Noto Sans"]
-
-# ###--------------------export_contet_texting-----------------------###
-# def main(page: ft.Page):
-
-#     global  gp
-#     gp  =   info_groups(
-#         color, 
-#         font, 
-#         direct_texting, 
-#         f"{direct_imagen}/nur_black.png", 
-#         f"{direct_imagen}/nur_black.png", 
-#         f"{direct_imagen}/nur_black.png"
-#     )
-#     gp.page =   page
-    
-#     page.bgcolor    =   color[0]
-#     page.padding    =   20
-    
-#     return  add()
-
-# ft.app(target=main)
 
