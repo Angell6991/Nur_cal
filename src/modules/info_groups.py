@@ -209,16 +209,6 @@ class   info_groups:
             return  self.init_menu(menu_navegation)
 
         def save_player(e):
-            # self.name_player.append(info_player[0].value)
-            # self.data_list.append([
-            #     int(info_player[2].value), 
-            #     int(info_player[3].value), 
-            #     int(info_player[4].value), 
-            #     int(info_player[5].value),
-            #     int(info_player[6].value)
-            # ])
-            # return self.intro_data_player(name_group, menu_navegation)  
-            
             self.name_player.append(info_player[0].value)
             valores = []
             indices = [2, 3, 4, 5, 6] 
@@ -226,7 +216,7 @@ class   info_groups:
                 try:
                     valores.append(int(info_player[i].value))
                 except (ValueError, TypeError):
-                    valores.append(0)  # valor predeterminado
+                    valores.append(0) 
             
             self.data_list.append(valores)
             return self.intro_data_player(name_group, menu_navegation)
