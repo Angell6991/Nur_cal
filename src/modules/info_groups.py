@@ -294,6 +294,49 @@ class   info_groups:
     def delet_group(self, name, menu_navegation):
         data.remove_list(self.direct_groups, name)
         return  self.init_menu(menu_navegation) 
+    
+    ###---------------------------Copy_group---------------------------###
+    def copy_group(self, name, menu_navegation):
+
+        def copy_and_exit(e):
+            origin  =   f"{self.direct_groups}/{name}.dat"
+            copy    =   f"{self.direct_groups}/{intro_name_copy.value}.dat"
+            
+            with    open(origin, "rb")  as  f_origen:
+                with    open(copy,  "wb")   as  f_copy:
+                    f_copy.write(f_origen.read())
+
+            return  self.init_menu(menu_navegation)
+
+        texto   =   ft.Text(
+            "Enter the name with which the copy is saved: ", 
+            size    =   20,
+            color   =   self.color[6],
+            font_family =   self.font[1],
+        )
+
+        intro_name_copy  =   self.input_box(f"Name copy {name}")   
+        boton   =   self.button_icon(copy_and_exit, "Copy", ft.Icons.COPY)
+
+        boton_container =   ft.Container(
+            ft.Row(
+                [ft.Container(boton, width=100)],
+                alignment   =   ft.MainAxisAlignment.CENTER,
+            )
+        )
+
+        box =   ft.Container(
+            ft.Column([texto, intro_name_copy, boton_container]), 
+            bgcolor=self.color[1], 
+            border_radius=15,
+            padding=20
+        )
+
+        self.page.controls.clear()
+        self.page.add(box)
+        return  self.page.update()
+
+
 
     ######################################################################
     ###-------------------Functions_graph_in_flet----------------------###
@@ -462,6 +505,7 @@ class   info_groups:
             )
         )
         boton_copy_group    =   ft.TextButton(
+            on_click    =   lambda e:   self.copy_group(name_group, menu_navegation),
             content =   ft.Text(
                 "Copy group",
                 color   =   self.color[6], 
