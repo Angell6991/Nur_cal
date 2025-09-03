@@ -2,6 +2,8 @@ import  modules.info_menu   as  menu
 import  modules.info_groups as  group
 
 import  flet    as  ft
+import  os
+
 from    flet    import  Icons
 
 ########################################################
@@ -17,6 +19,10 @@ font    =   ["Noto Serif Display", "Noto Sans"]
 
 direct_imagen   =   "storage/data"
 direct_list     =   "storage/data/list"
+
+# dest    =   os.path.join("/storage/emulated/0/", ".Nur_data_list")
+# os.makedirs(dest, exist_ok=True)
+# direct_imagen   =   "/storage/emulated/0/.Nur_data_list"
 
 ########################################################
 ###------------------Main_menu_flet------------------###
