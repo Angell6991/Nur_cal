@@ -463,6 +463,60 @@ class   info_groups:
         self.page.add(contenedor_main)
         return  self.page.update()
 
+    ###--------------------------Edit_player---------------------------###
+    def edit_player(self, name_list, menu_navegation):
+
+        def boton(player_name):
+            boton   =   ft.TextButton(
+                # on_click    =   lambda e:   delete(player_name),
+                content =   ft.Text(
+                    f"{player_name}",
+                    color   =   self.color[6], 
+                    weight  =   ft.FontWeight.BOLD, 
+                    size    =   20,
+                    font_family =   self.font[1],
+                )
+            )
+            return  boton
+
+        tabla   =   pd.read_csv(f"{self.direct_groups}/{name_list}.dat", sep=r"\s+")
+        name_player =   tabla.columns.tolist()
+        name_player =   name_player[1:-1]
+
+        boton_back  =   ft.IconButton(
+            ft.Icons.ARROW_BACK_IOS_OUTLINED, 
+            bgcolor =   self.color[6],
+            icon_size   =   40,
+            on_click    =    lambda e:   self.view_list(name_list, menu_navegation) 
+        )
+        texto_title =   ft.Text(
+            "Select Player to Edit",
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   40,
+            font_family =   self.font[0],
+        )
+        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=30))
+        texto_secondary =   ft.Text(
+            str(name_list),
+            color   =   self.color[6], 
+            weight  =   ft.FontWeight.BOLD, 
+            italic  =   True,
+            size    =   25,
+            font_family =   self.font[1],
+        )
+        
+        box =   ft.Container(
+            content =   ft.Column([boton(name)  for name in  name_player], scroll="always"),
+            height  =   700
+        )
+
+        self.page.controls.clear()
+        self.page.horizontal_alignment =   ft.MainAxisAlignment.START  
+        self.page.add(title, texto_secondary, ft.Divider(), box)
+        return  self.page.update()
+
 
     ######################################################################
     ###-------------------Functions_graph_in_flet----------------------###
@@ -498,6 +552,7 @@ class   info_groups:
                         on_click    =   lambda  e:  self.init_menu(menu_navegation)
                     ),
                     ft.TextButton(
+                        on_long_press   =   lambda  e:   self.edit_player(name_table, menu_navegation),
                         content =   ft.Text(
                             str(name_table), 
                             color   =   self.color[6], 
@@ -614,6 +669,7 @@ class   info_groups:
             )
         )
         boton_edit_player   =   ft.TextButton(
+            on_click    =   lambda  e:  self.edit_player(name_group, menu_navegation),
             content =   ft.Text(        
                 "Edit player",
                 color   =   self.color[6], 
