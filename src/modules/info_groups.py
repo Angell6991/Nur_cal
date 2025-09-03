@@ -463,12 +463,88 @@ class   info_groups:
         self.page.add(contenedor_main)
         return  self.page.update()
 
+    ###-------------------------Data_edit_player-----------------------###
+    def data_edit_player(self, name_list, name_player, menu_navegation):
+
+        ###--------------------------inport_data---------------------------###
+        tabla   =   pd.read_csv(f"{self.direct_groups}/{name_list}.dat", sep=r"\s+")
+        tabla_player    =   tabla[f"{name_player}"]   
+
+        ###---------------------definitions_functions----------------------###
+        def save_and_exit(e):
+
+            valores = []
+            indices = [0, 1, 2, 3, 4] 
+            for i in indices:
+                try:
+                    valores.append(int(info_player[i].value))
+                except (ValueError, TypeError):
+                    valores.append(int(tabla_player.loc[i])) 
+
+            data.add_player(self.direct_groups, name_list, name_player, valores)    
+            return  self.view_list(name_list, menu_navegation)
+
+        ###----------------------contenedor_superior-----------------------###
+        texto_title =   ft.Text(
+            f"Edit player: {name_player}", 
+            size    =   40,
+            color   =   self.color[0],
+            weight  =   ft.FontWeight.BOLD,
+            italic  =   True,
+            font_family =   self.font[0],
+            text_align  =   ft.TextAlign.START,
+        )
+        contenedor_01   =   ft.Container(
+            content =   ft.Row(controls=[texto_title], alignment=ft.MainAxisAlignment.CENTER, spacing=50),
+            bgcolor =   self.color[6],
+            border_radius   =   15,
+            padding =   ft.padding.all(20) 
+        )
+
+        ###------------------------contenedor_medio------------------------###
+        imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
+        info_player =   [
+            self.input_box(f"Life:  {tabla_player.loc[0]}"),
+            self.input_box(f"Damage:  {tabla_player.loc[1]}"),
+            self.input_box(f"Dodge:  {tabla_player.loc[2]}"),
+            self.input_box(f"Attack:  {tabla_player.loc[3]}"),
+            self.input_box(f"Dices:  {tabla_player.loc[4]}"),
+        ]
+        contenedor_02   =   ft.Container(
+            ft.Row(
+                [
+                    ft.Container(ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), bgcolor=self.color[0], height=400),
+                    ft.Container(ft.Column(info_player), bgcolor=self.color[1], padding=ft.padding.all(20), border_radius=15) 
+                ],
+                alignment=ft.MainAxisAlignment.SPACE_BETWEEN
+            )
+        )
+       
+        ###-----------------------contenedor_inferior----------------------###
+        boton_01    =   self.button_icon(save_and_exit, "Save data", ft.Icons.SAVE)
+        contenedor_03   =   ft.Container(
+            ft.Row(
+                [boton_01], 
+                alignment=ft.MainAxisAlignment.CENTER
+            ), 
+            padding=20, 
+            bgcolor=self.color[1],
+            border_radius=15
+        )
+
+        ###----------------------contenedor_principal----------------------###
+        contenedor_main =   ft.Container(ft.Column([contenedor_01, contenedor_02, contenedor_03], spacing=20))
+        
+        self.page.controls.clear()
+        self.page.add(contenedor_main)
+        return  self.page.update()
+
     ###--------------------------Edit_player---------------------------###
     def edit_player(self, name_list, menu_navegation):
 
         def boton(player_name):
             boton   =   ft.TextButton(
-                # on_click    =   lambda e:   delete(player_name),
+                on_click    =   lambda e:   self.data_edit_player(name_list, player_name, menu_navegation),
                 content =   ft.Text(
                     f"{player_name}",
                     color   =   self.color[6], 
