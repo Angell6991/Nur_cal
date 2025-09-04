@@ -1,5 +1,5 @@
 [project]
-name = "Nur cal"
+name = "nur-cal"
 version = "0.1.0"
 description = ""
 readme = "README.md"
@@ -11,7 +11,6 @@ dependencies = [
   "flet==0.28.3",
   "pandas",
   "numpy",
-  "os"
 ]
 
 [tool.flet]
@@ -21,7 +20,7 @@ org = "com.mycompany"
 
 # project display name that is used as an app title on Android and iOS home screens,
 # shown in window titles and about app dialogs on desktop.
-product = "Nur cal"
+product = "nur-cal"
 
 # company name to display in about app dialogs
 company = "Flet"

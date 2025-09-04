@@ -22,7 +22,7 @@ direct_list     =   "storage/data/list"
 
 # dest    =   os.path.join("/storage/emulated/0/", ".Nur_data_list")
 # os.makedirs(dest, exist_ok=True)
-# direct_imagen   =   "/storage/emulated/0/.Nur_data_list"
+# direct_list   =   "/storage/emulated/0/.Nur_data_list"
 
 ########################################################
 ###------------------Main_menu_flet------------------###
