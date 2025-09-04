@@ -82,19 +82,22 @@ class   info_groups:
 
     ###-------------------------baner_group----------------------------###
     def baner_group(self):
-        imagen  =   ft.Image(src=str(self.direct_imagen_group), width=170)
+        imagen  =   ft.Image(src=str(self.direct_imagen_group), width=120)
         texto   =   ft.Text(
             "Groups list", 
-            size    =   40, 
+            size    =   35, 
             color   =   self.color[7],
             font_family =   self.font[0],
             weight  =   ft.FontWeight.BOLD,
             italic  =   True
         )
-        box     =   ft.Row(
-            controls    =   [imagen, texto],
-            spacing     =   40,
-            alignment   =   ft.MainAxisAlignment.START,
+        box     =   ft.Column(
+            controls    =   [
+                ft.Container(ft.Row([imagen], alignment=ft.MainAxisAlignment.CENTER)), 
+                ft.Container(ft.Row([texto], alignment=ft.MainAxisAlignment.CENTER))
+            ],
+            spacing     =   10,
+            # alignment   =   ft.MainAxisAlignment.CENTER,
         )
         cont    =   ft.Container(
             content =   box, 
@@ -187,7 +190,7 @@ class   info_groups:
 
             lista_00    =   ft.Container(
                 content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
-                height  = 700 
+                height  = 600 
             )
 
             lista_groups    =   ft.Container(
@@ -357,20 +360,21 @@ class   info_groups:
             on_click    =    lambda e:   self.setting_group(name_list, menu_navegation) 
         )
         texto_title =   ft.Text(
-            "Select Player to Delete",
+            "Select Player to  Delete",
             color   =   self.color[6], 
             weight  =   ft.FontWeight.BOLD, 
             italic  =   True,
-            size    =   40,
+            size    =   27,
             font_family =   self.font[0],
+            text_align  =   ft.TextAlign.START,
         )
-        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=30))
+        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=11))
         texto_secondary =   ft.Text(
             str(name_list),
             color   =   self.color[6], 
             weight  =   ft.FontWeight.BOLD, 
             italic  =   True,
-            size    =   25,
+            size    =   22,
             font_family =   self.font[1],
         )
         
@@ -570,16 +574,16 @@ class   info_groups:
             color   =   self.color[6], 
             weight  =   ft.FontWeight.BOLD, 
             italic  =   True,
-            size    =   40,
+            size    =   27,
             font_family =   self.font[0],
         )
-        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=30))
+        title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=20))
         texto_secondary =   ft.Text(
             str(name_list),
             color   =   self.color[6], 
             weight  =   ft.FontWeight.BOLD, 
             italic  =   True,
-            size    =   25,
+            size    =   22,
             font_family =   self.font[1],
         )
         
@@ -722,8 +726,9 @@ class   info_groups:
             color   =   self.color[6], 
             weight  =   ft.FontWeight.BOLD, 
             italic  =   True,
-            size    =   50,
+            size    =   35,
             font_family =   self.font[0],
+            text_align  =   ft.TextAlign.START,
         )
         title   =   ft.Container(content=ft.Row([boton_back, texto_title], spacing=20))
         texto_secondary =   ft.Text(
