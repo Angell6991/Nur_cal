@@ -225,10 +225,10 @@ class   info_groups:
             return self.intro_data_player(name_group, menu_navegation)
 
         ###----------------------contenedor_superior-----------------------###
-        imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=170)
+        imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=120)
         texto_title =   ft.Text(
-            "Enter a player \n to the group", 
-            size    =   25,
+            "Enter a player to the group", 
+            size    =   23,
             color   =   self.color[0],
             weight  =   ft.FontWeight.BOLD,
             italic  =   True,
@@ -236,7 +236,13 @@ class   info_groups:
             text_align  =   ft.TextAlign.START,
         )
         contenedor_01   =   ft.Container(
-            content =   ft.Row(controls=[imag_title, texto_title], alignment=ft.MainAxisAlignment.START, spacing=50),
+            content =   ft.Column(
+                controls=[
+                    ft.Container(ft.Row([imag_title], alignment=ft.MainAxisAlignment.CENTER)), 
+                    ft.Container(ft.Row([texto_title], alignment=ft.MainAxisAlignment.CENTER))
+                ], 
+                spacing=10
+            ),
             bgcolor =   self.color[6],
             border_radius   =   15,
             padding =   ft.padding.all(20) 
@@ -246,7 +252,7 @@ class   info_groups:
         imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
         info_player =   [
             self.input_box("Name"),
-            ft.Divider(),
+            ft.Divider(color=self.color[1]),
             self.input_box("Life"),
             self.input_box("Damage"),
             self.input_box("Dodge"),
@@ -256,8 +262,18 @@ class   info_groups:
         contenedor_02   =   ft.Container(
             ft.Row(
                 [
-                    ft.Container(ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), bgcolor=self.color[0], height=400),
-                    ft.Container(ft.Column(info_player), bgcolor=self.color[1], padding=ft.padding.all(20), border_radius=15) 
+                    ft.Container(
+                        ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
+                        bgcolor=self.color[0], 
+                        height=280
+                    ),
+                    ft.Container(
+                        ft.Column(info_player), 
+                        bgcolor=self.color[1], 
+                        padding=ft.padding.all(20), 
+                        border_radius=15,
+                        width=190
+                    ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
             )
@@ -267,9 +283,13 @@ class   info_groups:
         boton_01    =   self.button_icon(save_exit, "Save group and exit", ft.Icons.SAVE)
         boton_02    =   self.button_icon(save_player, "Enter another player", ft.Icons.GROUP_ADD)
         contenedor_03   =   ft.Container(
-            ft.Row(
-                [boton_01, boton_02], 
-                alignment=ft.MainAxisAlignment.SPACE_EVENLY
+            ft.Column(
+                [
+                    ft.Container(ft.Row([boton_02], alignment=ft.MainAxisAlignment.CENTER)), 
+                    ft.Container(ft.Row([boton_01], alignment=ft.MainAxisAlignment.CENTER))
+                ], 
+                alignment=ft.MainAxisAlignment.SPACE_EVENLY,
+                spacing=20
             ), 
             padding=20, 
             bgcolor=self.color[1],
@@ -410,10 +430,10 @@ class   info_groups:
             return  self.view_list(name_list, menu_navegation)
 
         ###----------------------contenedor_superior-----------------------###
-        imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=170)
+        imag_title  =   ft.Image(src=str(self.direct_imagen_player_01), width=120)
         texto_title =   ft.Text(
             "Add new player", 
-            size    =   40,
+            size    =   25,
             color   =   self.color[0],
             weight  =   ft.FontWeight.BOLD,
             italic  =   True,
@@ -421,7 +441,14 @@ class   info_groups:
             text_align  =   ft.TextAlign.START,
         )
         contenedor_01   =   ft.Container(
-            content =   ft.Row(controls=[imag_title, texto_title], alignment=ft.MainAxisAlignment.START, spacing=50),
+            content =   ft.Column(
+                controls=[
+                    ft.Container(ft.Row([imag_title],alignment=ft.MainAxisAlignment.CENTER)), 
+                    ft.Container(ft.Row([texto_title],alignment=ft.MainAxisAlignment.CENTER))
+                ], 
+                alignment=ft.MainAxisAlignment.START, 
+                spacing=10
+            ),
             bgcolor =   self.color[6],
             border_radius   =   15,
             padding =   ft.padding.all(20) 
@@ -431,7 +458,7 @@ class   info_groups:
         imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
         info_player =   [
             self.input_box("Name"),
-            ft.Divider(),
+            ft.Divider(color=self.color[1]),
             self.input_box("Life"),
             self.input_box("Damage"),
             self.input_box("Dodge"),
@@ -441,8 +468,18 @@ class   info_groups:
         contenedor_02   =   ft.Container(
             ft.Row(
                 [
-                    ft.Container(ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), bgcolor=self.color[0], height=400),
-                    ft.Container(ft.Column(info_player), bgcolor=self.color[1], padding=ft.padding.all(20), border_radius=15) 
+                    ft.Container(
+                        ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
+                        bgcolor=self.color[0], 
+                        height=280
+                    ),
+                    ft.Container(
+                        ft.Column(info_player), 
+                        bgcolor=self.color[1], 
+                        padding=ft.padding.all(20), 
+                        border_radius=15,
+                        width=190
+                    ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
             )
@@ -490,13 +527,13 @@ class   info_groups:
 
         ###----------------------contenedor_superior-----------------------###
         texto_title =   ft.Text(
-            f"Edit player: {name_player}", 
-            size    =   40,
+            f"Edit player: \n {name_player}", 
+            size    =   25,
             color   =   self.color[0],
             weight  =   ft.FontWeight.BOLD,
             italic  =   True,
             font_family =   self.font[0],
-            text_align  =   ft.TextAlign.START,
+            text_align  =   ft.TextAlign.CENTER,
         )
         contenedor_01   =   ft.Container(
             content =   ft.Row(controls=[texto_title], alignment=ft.MainAxisAlignment.CENTER, spacing=50),
@@ -517,8 +554,18 @@ class   info_groups:
         contenedor_02   =   ft.Container(
             ft.Row(
                 [
-                    ft.Container(ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), bgcolor=self.color[0], height=400),
-                    ft.Container(ft.Column(info_player), bgcolor=self.color[1], padding=ft.padding.all(20), border_radius=15) 
+                    ft.Container(
+                        ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
+                        bgcolor=self.color[0], 
+                        height=280
+                    ),
+                    ft.Container(
+                        ft.Column(info_player), 
+                        bgcolor=self.color[1], 
+                        padding=ft.padding.all(20), 
+                        border_radius=15,
+                        width=190
+                    ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
             )
