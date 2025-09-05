@@ -61,6 +61,56 @@ class   info_groups:
         )
         return  view
 
+    ###-------------------------window_confirm-------------------------###
+    def window_confirm(self, label, action):
+
+        def _on_yes(e):
+            self.page.close(dlg_modal)
+            try:
+                action(e)
+            except TypeError:
+                action()
+
+        dlg_modal = ft.AlertDialog(
+            bgcolor=self.color[1],
+            modal=True,
+            title=ft.Text(
+                "Please confirm",
+                size    =   "20", 
+                color   =   self.color[4], 
+                weight  =   ft.FontWeight.BOLD,
+                italic  =   True,
+                font_family =   self.font[1] 
+
+            ),
+            content=ft.Text(
+                str(label),
+                size    =   "15", 
+                color   =   self.color[6], 
+                font_family =   self.font[1] 
+            ),
+            actions=[
+                ft.TextButton(
+                    content=ft.Text(
+                        "No",
+                        size    =   "20", 
+                        color   =   self.color[6], 
+                        font_family =   self.font[1]
+                    ), 
+                    on_click=lambda e: self.page.close(dlg_modal)),
+                ft.TextButton(
+                    content=ft.Text(
+                        "Yes",
+                        size    =   "20", 
+                        color   =   self.color[4], 
+                        font_family =   self.font[1]
+                    ), 
+                    on_click=_on_yes),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+        return self.page.open(dlg_modal)
+
     ###-------------------------bar_intro_data-------------------------###
     def input_box(self, intro):
         
@@ -358,7 +408,11 @@ class   info_groups:
 
         def boton(player_name):
             boton   =   ft.TextButton(
-                on_click    =   lambda e:   delete(player_name),
+                on_click    =   lambda e:   self.window_confirm(
+                    f"Delete: {player_name}",
+                    lambda e:   delete(player_name)
+                ),
+                # on_click    =   lambda e:   delete(player_name),
                 content =   ft.Text(
                     f"{player_name}",
                     color   =   self.color[6], 
@@ -827,7 +881,11 @@ class   info_groups:
             )
         )
         boton_delete_group    =   ft.TextButton(
-            on_click    =   lambda e:   self.delet_group(name_group, menu_navegation),
+            on_click    =   lambda  e:  self.window_confirm(
+                f"Delete: {name_group}", 
+                lambda  e:  self.delet_group(name_group, menu_navegation)
+            ),
+            # on_click    =   lambda e:   self.delet_group(name_group, menu_navegation),
             content =   ft.Text(
                 "Delete group",
                 color   =   self.color[5], 

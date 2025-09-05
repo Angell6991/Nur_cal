@@ -20,9 +20,9 @@ font    =   ["Noto Serif Display", "Noto Sans"]
 direct_imagen   =   "storage/data"
 direct_list     =   "storage/data/list"
 
-# dest    =   os.path.join("/storage/emulated/0/", ".Nur_data_list")
+# dest    =   os.path.join(os.path.expanduser("~"), ".Nur_data_list")
 # os.makedirs(dest, exist_ok=True)
-# direct_list   =   "/storage/emulated/0/.Nur_data_list"
+# direct_list = str(os.path.expanduser("~")) + "/.Nur_data_list"
 
 ########################################################
 ###------------------Main_menu_flet------------------###
