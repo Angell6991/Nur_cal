@@ -10,13 +10,13 @@ import  os
 class   info_groups:
 
     def __init__(self, color, font, direct_groups, direct_imagen_group, direct_imagen_player_01, direct_imagen_player_02):
+        self.page   =   None
         self.color  =   color
         self.font   =   font
         self.direct_groups  =   direct_groups
         self.direct_imagen_group    =   direct_imagen_group
         self.direct_imagen_player_01    =   direct_imagen_player_01
         self.direct_imagen_player_02    =   direct_imagen_player_02
-        self.page   =   None
 
         ###----------------define_variables_para_crear_listas--------------###
         self.name_player    =   []
