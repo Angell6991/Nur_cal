@@ -57,12 +57,7 @@ def main_menu(page: ft.Page):
         elif    selected_index  ==  2:
             vs  =   versus.info_versus(color, font, direct_list, f"{direct_imagen}/logo_02.png")
             vs.page =   page
-
-            page.floating_action_button =   None
-            page.add(
-                vs.graph("rios", "sara", [1,2,3], [10,20,30]), 
-                menu_navegation
-            )
+            vs.main_menu(menu_navegation)
         
         return  page.update()
    
