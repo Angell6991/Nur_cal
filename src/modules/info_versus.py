@@ -1,8 +1,8 @@
-from numpy import size
 import  modules.probability   as  prob
 
 import  flet    as  ft
 import  pandas  as  pd
+import  numpy   as  np
 import  matplotlib
 import  matplotlib.pyplot   as  plt
 import  os
@@ -31,8 +31,9 @@ class   info_versus:
     def graph(self, name_group, name_player, die_list, probability_list):
         fig, ax = plt.subplots()
 
-        x_label = die_list
-        y_label = probability_list
+        x_label =   die_list
+        x_label =   [str(die_list[i]) for i in range(len(die_list))]
+        y_label =   probability_list
 
         ax.barh(x_label, y_label, color=self.color[4], height=0.4)
 
@@ -41,10 +42,11 @@ class   info_versus:
         ax.grid(axis="x", linestyle="--", color=self.color[3], alpha=0.7)
         ax.set_xlabel("Probability %", color=self.color[3], size=15)
         ax.set_xticks(y_label)
+        ax.set_yticks(x_label)
         ax.set_ylabel("Number of blows to die", color=self.color[3], size=15)
         ax.set_title(f"{name_group}: {name_player}", color=self.color[3], size=25)
-        ax.tick_params(axis="x", colors=self.color[3], labelsize=12, rotation=45)
-        ax.tick_params(axis="y", colors=self.color[3], labelsize=12, rotation=45)
+        ax.tick_params(axis="x", colors=self.color[3], labelsize=15, rotation=45)
+        ax.tick_params(axis="y", colors=self.color[3], labelsize=15, )
         ax.set_facecolor(self.color[0])
 
         fig.tight_layout()
@@ -59,20 +61,108 @@ class   info_versus:
 
         intro   =   ft.DropdownM2(
             bgcolor=self.color[1],
-            border_color=self.color[1],
+            border_color=self.color[3],
             border_radius=15,
             color=self.color[6],
             label=str(label),
-            label_style=ft.TextStyle(color=self.color[4], font_family=self.font[1], size=18),
+            label_style=ft.TextStyle(color=self.color[3], font_family=self.font[1], size=18),
             text_style=ft.TextStyle(color=self.color[6], font_family=self.font[1]),
             text_size=18,
             width=120,
-            select_icon_enabled_color=self.color[4],
+            select_icon_enabled_color=self.color[6],
             options=[ ft.dropdownm2.Option( str(i) ) for i in lista ],
         )
 
         return  intro
 
+    ###------------------------input_player----------------------------###
+    def input_player(self, label, group):
+
+        if  group   ==  None:
+
+            intro   =   ft.DropdownM2(
+                bgcolor=self.color[1],
+                border_color=self.color[3],
+                border_radius=15,
+                color=self.color[6],
+                label=str(label),
+                label_style=ft.TextStyle(color=self.color[3], font_family=self.font[1], size=18),
+                text_style=ft.TextStyle(color=self.color[6], font_family=self.font[1]),
+                text_size=18,
+                width=120,
+                select_icon_enabled_color=self.color[6],
+                disabled=True,
+                options=[ ft.dropdownm2.Option("None") ],
+            )
+            return  intro
+
+        elif    group   !=  None:
+
+            tabla   =   pd.read_csv(f"{self.direct_groups}/{group}.dat", sep=r"\s+")
+            lista   =   tabla.columns.tolist()
+            lista   =   lista[1:-1]
+
+            intro   =   ft.DropdownM2(
+                bgcolor=self.color[1],
+                border_color=self.color[1],
+                border_radius=15,
+                color=self.color[6],
+                label=str(label),
+                label_style=ft.TextStyle(color=self.color[4], font_family=self.font[1], size=18),
+                text_style=ft.TextStyle(color=self.color[6], font_family=self.font[1]),
+                text_size=18,
+                width=120,
+                select_icon_enabled_color=self.color[4],
+                disabled=True,
+                options=[ ft.dropdownm2.Option( str(i) ) for i in lista ],
+            )
+            return  intro
+
+    ###------------------------button_icon-----------------------------###
+    def button_icon(self, action, label, icono):
+        
+        boton   =   ft.FilledButton(
+            content =   ft.Row([
+                ft.Icon(icono, size=20, color=self.color[0]),
+                ft.Text(str(label), size=17, text_align=ft.TextAlign.CENTER),
+            ], alignment=ft.MainAxisAlignment.CENTER, spacing=8
+            ),
+            on_click=   action,
+            color   =   self.color[0],
+            bgcolor =   self.color[6],
+            style   =   ft.ButtonStyle(shape=ft.ContinuousRectangleBorder(radius=28)),
+            # disabled=   True,
+        )
+        return  boton
+
+    ###------------------------view_result-----------------------------###
+    def view_result(self, group_01, group_02, player_01, player_02, menu_navegation):
+
+        tabla_01    =   pd.read_csv(f"{self.direct_groups}/{group_01}.dat", sep=r"\s+")
+        tabla_02    =   pd.read_csv(f"{self.direct_groups}/{group_02}.dat", sep=r"\s+")
+
+        data_player_01  =   np.array(tabla_01[f"{player_01}"])
+        data_player_02  =   np.array(tabla_01[f"{player_02}"])
+
+        pb  =   prob.probability(data_player_01, data_player_02)
+
+        list_die_01 =   pb.list_probability_die_1
+        list_die_01 =   [round(list_die_01[i]*100, 1) for i in range(len(list_die_01))]
+
+        list_die_02 =   pb.list_probability_die_2
+        list_die_02 =   [round(list_die_02[i]*100, 1) for i in range(len(list_die_02))]
+
+
+        graph_01    =   self.graph(group_01, player_01, pb.list_unique_1, list_die_01)
+        graph_02    =   self.graph(group_02, player_02, pb.list_unique_2, list_die_02)
+
+        
+        self.page.controls.clear()
+        self.page.add(graph_01, graph_02)
+        # self.page.add(cont, menu_navegation)
+        # self.page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
+        # self.page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
+        return  self.page.update()
 
     ######################################################################
     ###-------------------Functions_graph_in_flet----------------------###
@@ -80,54 +170,99 @@ class   info_versus:
 
     ###-------------------------main_menu------------------------------###
     def main_menu(self, menu_navegation):
-       
+
+        ###---------------variables_del_baner_superio----------------------###
         imagen  =   ft.Image(src=str(self.direct_img), width=100)
         
-        group_01    =   self.input_group("group 1")
-        group_02    =   self.input_group("group 2")
+        group_01    =   self.input_group("group")
+        group_02    =   self.input_group("group")
+        
+        player_01   =   self.input_player("player", group_01.value)
+        player_02   =   self.input_player("player", group_02.value)
 
-        super_l   =   ft.Container(ft.Column([imagen]), padding=5, bgcolor=self.color[1], border_radius=15)
-        super_r =   ft.Container(
-            ft.Column([
-                ft.Container(ft.Row([group_01, group_01])),
-                ft.Container(ft.Row([group_02, group_02]))
-            ])
+        boton   =   self.button_icon(
+            lambda e: self.view_result(group_01.value, group_02.value, player_01.value, player_02.value, menu_navegation),
+            "calculated", 
+            ft.Icons.LOCAL_FIRE_DEPARTMENT
         )
+        
+        ###------------funciones_para_actualizar_player_list---------------###
+        def change_01(e):
+            value = (group_01.value or "")
+            
+            if value.strip() == "":
+                # No hay grupo seleccionado: deshabilitar y mostrar "None"
+                player_01.disabled = True
+                player_01.options = [ ft.dropdownm2.Option("None") ]
+            
+            else:
+                try:
+                  tabla = pd.read_csv(f"{self.direct_groups}/{value}.dat", sep=r"\s+")
+                  lista = tabla.columns.tolist()
+                  lista = lista[1:-1] 
+                  player_01.disabled = False
+                  player_01.options = [ ft.dropdownm2.Option(str(i)) for i in lista ]
+                except Exception as ex:
+                  # En caso de fallo, dejarlo deshabilitado
+                  player_01.disabled = True
+                  player_01.options = [ ft.dropdownm2.Option("None") ]
+            
+            return  self.page.update()
+        group_01.on_change = change_01
 
-        super   =   ft.Container(ft.Row([super_l, super_r], alignment=ft.MainAxisAlignment.CENTER))
-        infer   =   ft.Text("mundo")
 
-        cont    =   ft.Container(ft.Column([super,infer], spacing=20, alignment=ft.MainAxisAlignment.START), padding=10)
+        def change_02(e):
+            value = (group_02.value or "")
+            
+            if value.strip() == "":
+                # No hay grupo seleccionado: deshabilitar y mostrar "None"
+                player_02.disabled = True
+                player_02.options = [ ft.dropdownm2.Option("None") ]
+            
+            else:
+                try:
+                  tabla = pd.read_csv(f"{self.direct_groups}/{value}.dat", sep=r"\s+")
+                  lista = tabla.columns.tolist()
+                  lista = lista[1:-1]  
+                  player_02.disabled = False
+                  player_02.options = [ ft.dropdownm2.Option(str(i)) for i in lista ]
+                except Exception as ex:
+                  # En caso de fallo, dejarlo deshabilitado
+                  player_02.disabled = True
+                  player_02.options = [ ft.dropdownm2.Option("None") ]
+            
+            return  self.page.update()
+        group_02.on_change  =   change_02
 
+        ###----------------------------Super-------------------------------###
+        texto    =   ft.Text(
+            "Battle 1 vs 1", 
+            size    =   "55", 
+            color   =   self.color[4], 
+            weight  =   ft.FontWeight.BOLD,
+            italic  =   True,
+            font_family =   self.font[0] 
+        )
+        super   =   ft.Container(ft.Row([texto], alignment=ft.MainAxisAlignment.CENTER))
+
+        ###---------------------------Center-------------------------------###
+        center_l =   ft.Container(ft.Column([group_01, player_01]))
+        center_c =   ft.Container(ft.Column([imagen]), padding=5, bgcolor=self.color[1], border_radius=15)
+        center_r =   ft.Container(ft.Column([group_02, player_02]))
+
+        center   =   ft.Container(ft.Row([center_l, center_c, center_r], alignment=ft.MainAxisAlignment.CENTER))
+       
+        ###---------------------------Inferior-----------------------------###
+        infer   =   ft.Container(ft.Row([boton], alignment=ft.MainAxisAlignment.CENTER))
+
+        ###--------------------------Contenedor----------------------------###
+        cont    =   ft.Container(ft.Column([super, center, infer], spacing=30))
 
         self.page.controls.clear()
         self.page.add(cont, menu_navegation)
         self.page.floating_action_button =   None
         self.page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
-        self.page.vertical_alignment     =   ft.MainAxisAlignment.START   
+        self.page.vertical_alignment     =   ft.MainAxisAlignment.CENTER   
         return  self.page.update()
-
-# import flet as ft
-
-
-# def main(page: ft.Page):
-#     def button_clicked(e):
-#         t.value = f"Dropdown value is:  {dd.value}"
-#         page.update()
-
-#     t = ft.Text()
-#     b = ft.ElevatedButton(text="Submit", on_click=button_clicked)
-#     dd = ft.DropdownM2(
-#         width=100,
-#         options=[
-#             ft.dropdownm2.Option("Red"),
-#             ft.dropdownm2.Option("Green"),
-#             ft.dropdownm2.Option("Blue"),
-#         ],
-#     )
-#     page.add(dd, b, t)
-
-
-# ft.app(main)
 
 
