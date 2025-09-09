@@ -260,7 +260,7 @@ class   info_versus:
                 scroll=ft.ScrollMode.HIDDEN,
                 spacing=10,
             ), 
-            height=600
+            height=800
         )
 
         ###------------------------main_container--------------------------###
