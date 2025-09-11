@@ -787,10 +787,11 @@ class   info_groups:
 
         intro_name  =   self.input_box("Name")   
         boton   =   self.button_icon(lambda e: self.intro_data_player(intro_name.value, menu_navegation), "Next", ft.Icons.SAVE_AS)
+        boton_cancel    =   self.button_icon(lambda e: self.init_menu(menu_navegation), "Cancel", ft.Icons.CANCEL)
 
         boton_container =   ft.Container(
             ft.Row(
-                [ft.Container(boton, width=100)],
+                [ft.Container(ft.Row([boton_cancel, boton]))],
                 alignment   =   ft.MainAxisAlignment.CENTER,
             )
         )

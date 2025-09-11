@@ -68,7 +68,7 @@ class   info_versus:
                     ft.ChartAxisLabel(
                         value=lista[i],
                         label=ft.Container(
-                            ft.Text(f"{round(lista[i], 1)} %", color=self.color[6], font_family=self.font[1]), 
+                            ft.Text(f"{round(lista[i], 1)}", color=self.color[6], font_family=self.font[1]), 
                             padding=0
                         )
                     ) for i in range(n_y)
