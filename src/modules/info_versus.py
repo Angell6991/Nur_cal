@@ -29,29 +29,66 @@ class   info_versus:
 
     ###---------------------------Graph--------------------------------###
     def graph(self, name_group, name_player, die_list, probability_list):
-        fig, ax = plt.subplots()
+       
+        title   =   ft.Container(
+            ft.Row(
+                [ft.Text(f"{name_group}: {name_player}", color=self.color[6], font_family=self.font[1], size=18)],
+                alignment   =   ft.MainAxisAlignment.CENTER
+            )
+        )
 
-        x_label =   die_list
-        x_label =   [str(die_list[i]) for i in range(len(die_list))]
-        y_label =   probability_list
+        lista   =   probability_list
+        n_y     =   len(lista)
 
-        ax.barh(x_label, y_label, color=self.color[4], height=0.4)
+        name_list   =   die_list
+        n_x     =   len(name_list)
 
-        fig.patch.set_facecolor(self.color[1])
-        ax.set_axisbelow(True)
-        ax.grid(axis="x", linestyle="--", color=self.color[3], alpha=0.7)
-        ax.set_xlabel("Probability %", color=self.color[3], size=15)
-        ax.set_xticks(y_label)
-        ax.set_yticks(x_label)
-        ax.set_ylabel("Number of blows to die", color=self.color[3], size=15)
-        ax.set_title(f"{name_group}: {name_player}", color=self.color[3], size=25)
-        ax.tick_params(axis="x", colors=self.color[3], labelsize=15, rotation=45)
-        ax.tick_params(axis="y", colors=self.color[3], labelsize=15, )
-        ax.set_facecolor(self.color[0])
+        chart   =   ft.BarChart(
+            
+            bar_groups  =   [ 
+                ft.BarChartGroup(
+                    x=i, 
+                    bar_rods=[ft.BarChartRod(from_y=0, to_y=lista[i], width=20, color=self.color[4], border_radius=20)]
+                ) for i in range(n_y)
+            ],
 
-        fig.tight_layout()
+            bottom_axis =   ft.ChartAxis(
+                labels  =   [ 
+                    ft.ChartAxisLabel(
+                        value=i, 
+                        label=ft.Container(ft.Text(f"{name_list[i]}", color=self.color[6], font_family=self.font[1]), padding=10)
+                        ) for i in range(n_x) 
+                ],
+                title=ft.Text("Number of blows to die", color=self.color[6], font_family=self.font[1]), 
+                labels_size=40,
+            ),
+
+            left_axis=ft.ChartAxis(
+                labels=[
+                    ft.ChartAxisLabel(
+                        value=lista[i],
+                        label=ft.Container(
+                            ft.Text(f"{round(lista[i], 1)} %", color=self.color[6], font_family=self.font[1]), 
+                            padding=0
+                        )
+                    ) for i in range(n_y)
+                ],
+                title=ft.Text("Probability %", color=self.color[6], font_family=self.font[1]), 
+                title_size=20,
+                labels_size=40,
+            ),
+
+            # border=ft.border.all(1, color=self.color[6]),
+            horizontal_grid_lines=ft.ChartGridLines(color=self.color[6], width=1, dash_pattern=[3, 3]),
+            tooltip_bgcolor=ft.Colors.with_opacity(0.9, color=self.color[0]),
+            # max_y=round(max(lista) + 5, 0),
+            interactive=True,
+            expand=True,
+        )
         
-        return  MatplotlibChart(fig, expand=True)
+        cont    =   ft.Container(ft.Column([title, chart], alignment=ft.CrossAxisAlignment.CENTER), padding=20)
+
+        return  cont
 
     ###------------------------input_group-----------------------------###
     def input_group(self, label):
