@@ -32,13 +32,13 @@ class   info_menu:
         )
        
         self.git_hut   =   ft.TextButton(
-            content =   ft.Text(" ", size=30, color=color_git, font_family="3270 Nerd Font"),
+            content =   ft.Text(" ", size=30, color=color_git, font_family=font[2]),
             url     =   "https://github.com/Angell6991/Nur_cal",
             style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )
 
         self.nur_web   =   ft.TextButton(
-            content =   ft.Text("󰖟 ", size=30, color=color_blog, font_family="3270 Nerd Font"),
+            content =   ft.Text("󰖟 ", size=30, color=color_blog, font_family=font[2]),
             url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
             style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )

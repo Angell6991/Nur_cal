@@ -16,7 +16,11 @@ color   =   [
     "#9FDFED"
 ]
 
-font    =   ["Noto Serif Display", "Noto Sans"]
+font_dir    =   [
+    "assets/fonts/NotoSerifDisplay-BoldItalic.ttf",
+    "assets/fonts/Ubuntu-R.ttf",
+    "assets/fonts/3270NerdFont-SemiCondensed.ttf"
+]
 
 direct_imagen   =   "storage/data"
 direct_list     =   "storage/data/list"
@@ -30,6 +34,13 @@ direct_list     =   "storage/data/list"
 ########################################################
 def main_menu(page: ft.Page):
 
+    ###------------------fonts---------------------------###
+    page.fonts  =   {
+        "title":  font_dir[0],
+        "text":   font_dir[1],
+        "icons":  font_dir[2],
+    }
+    font    =   ["title", "text", "icons"]
    
     ###----------acciones_para_la_barra_de_menu----------###
     def action_menu(e):
