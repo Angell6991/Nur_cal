@@ -1,15 +1,10 @@
 import  modules.probability   as  prob
 
-import  flet    as  ft
 import  pandas  as  pd
 import  numpy   as  np
-import  matplotlib
-import  matplotlib.pyplot   as  plt
+import  flet    as  ft
 import  os
 
-from    flet.matplotlib_chart   import  MatplotlibChart
-
-matplotlib.use("svg")
 
 ######################################################################
 ###---------------------Groups_menu_flet---------------------------###

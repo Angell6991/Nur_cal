@@ -380,10 +380,11 @@ class   info_groups:
 
         intro_name_copy  =   self.input_box(f"Name copy {name}")   
         boton   =   self.button_icon(copy_and_exit, "Copy", ft.Icons.COPY)
+        boton_cancel    =   self.button_icon(lambda e: self.setting_group(name, menu_navegation), "Cancel", ft.Icons.CANCEL)
 
         boton_container =   ft.Container(
             ft.Row(
-                [ft.Container(boton, width=100)],
+                [ft.Container(ft.Row([boton_cancel, boton]))],
                 alignment   =   ft.MainAxisAlignment.CENTER,
             )
         )
@@ -541,9 +542,10 @@ class   info_groups:
        
         ###-----------------------contenedor_inferior----------------------###
         boton_01    =   self.button_icon(save_exit, "Save player", ft.Icons.SAVE)
+        boton_cancel    =   self.button_icon(lambda e: self.setting_group(name_list, menu_navegation), "Cancel", ft.Icons.CANCEL)
         contenedor_03   =   ft.Container(
             ft.Row(
-                [boton_01], 
+                [boton_cancel, boton_01], 
                 alignment=ft.MainAxisAlignment.CENTER
             ), 
             padding=20, 
