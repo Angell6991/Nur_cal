@@ -132,7 +132,7 @@ class   info_versus:
 
             tabla   =   pd.read_csv(f"{self.direct_groups}/{group}.dat", sep=r"\s+")
             lista   =   tabla.columns.tolist()
-            lista   =   lista[1:-1]
+            lista   =   lista[1:]
 
             intro   =   ft.DropdownM2(
                 bgcolor=self.color[1],
@@ -339,7 +339,7 @@ class   info_versus:
                 try:
                   tabla = pd.read_csv(f"{self.direct_groups}/{value}.dat", sep=r"\s+")
                   lista = tabla.columns.tolist()
-                  lista = lista[1:-1] 
+                  lista = lista[1:] 
                   player_01.disabled = False
                   player_01.options = [ ft.dropdownm2.Option(str(i)) for i in lista ]
                 except Exception as ex:
@@ -363,7 +363,7 @@ class   info_versus:
                 try:
                   tabla = pd.read_csv(f"{self.direct_groups}/{value}.dat", sep=r"\s+")
                   lista = tabla.columns.tolist()
-                  lista = lista[1:-1]  
+                  lista = lista[1:]  
                   player_02.disabled = False
                   player_02.options = [ ft.dropdownm2.Option(str(i)) for i in lista ]
                 except Exception as ex:
