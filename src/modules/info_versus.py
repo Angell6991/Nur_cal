@@ -198,7 +198,7 @@ class   info_versus:
         tabla_02    =   pd.read_csv(f"{self.direct_groups}/{group_02}.dat", sep=r"\s+")
 
         data_player_01  =   np.array(tabla_01[f"{player_01}"])
-        data_player_02  =   np.array(tabla_01[f"{player_02}"])
+        data_player_02  =   np.array(tabla_02[f"{player_02}"])
 
         pb  =   prob.probability(data_player_01, data_player_02)
         
