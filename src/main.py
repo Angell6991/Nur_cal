@@ -23,11 +23,12 @@ font_dir    =   [
 ]
 
 direct_imagen   =   "storage/data"
-direct_list     =   "storage/data/list"
+# direct_list     =   "storage/data/list"
 
-# dest    =   os.path.join(os.path.expanduser("~"), ".Nur_data_list")
-# os.makedirs(dest, exist_ok=True)
-# direct_list = str(os.path.expanduser("~")) + "/.Nur_data_list"
+dest    =   os.path.join(os.getcwd(), ".Nur_data_list")
+os.makedirs(dest, exist_ok=True)
+direct_list = dest
+
 
 ########################################################
 ###------------------Main_menu_flet------------------###
