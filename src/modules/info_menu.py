@@ -56,7 +56,8 @@ class   info_menu:
         self.page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
         self.page.vertical_alignment     =   ft.MainAxisAlignment.CENTER  
         self.page.floating_action_button =   None
-        self.page.add(self.name_app, self.imagen, self.texto, self.botones_en_fila, menu_navegation)
+        # self.page.add(self.name_app, self.imagen, self.texto, self.botones_en_fila, menu_navegation)
+        self.page.add(self.name_app, self.imagen, self.texto, menu_navegation)#, self.botones_en_fila
         return  self.page.update()
 
 

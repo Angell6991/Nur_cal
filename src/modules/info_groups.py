@@ -210,7 +210,8 @@ class   info_groups:
                 ], 
                 alignment=ft.VerticalAlignment.START, spacing=10
                 ),
-                on_click    =   lambda  e:  self.view_list(name, menu_navegation)
+                on_click    =   lambda  e:  self.view_list(name, menu_navegation),
+                on_long_press   =   lambda  e:   self.setting_group(name, menu_navegation),
             )
             return  boton
 
@@ -735,7 +736,6 @@ class   info_groups:
                         on_click    =   lambda  e:  self.init_menu(menu_navegation)
                     ),
                     ft.TextButton(
-                        on_long_press   =   lambda  e:   self.edit_player(name_table, menu_navegation),
                         content =   ft.Text(
                             str(name_table), 
                             color   =   self.color[6], 
@@ -915,6 +915,7 @@ class   info_groups:
             )
         )
         self.page.controls.clear()
+        self.page.floating_action_button =   None
         self.page.add(box)
         return  self.page.update()
 
