@@ -9,10 +9,11 @@ import  os
 ######################################################################
 class   info_groups:
 
-    def __init__(self, color, font, direct_groups, direct_imagen_group, direct_imagen_player_01, direct_imagen_player_02):
+    def __init__(self, color, font, direct_groups, direct_imagen_group, direct_imagen_player_01, direct_imagen_player_02, diment):
         self.page   =   None
         self.color  =   color
         self.font   =   font
+        self.dimentions =   diment
         self.direct_groups  =   direct_groups
         self.direct_imagen_group    =   direct_imagen_group
         self.direct_imagen_player_01    =   direct_imagen_player_01
@@ -241,7 +242,7 @@ class   info_groups:
 
             lista_00    =   ft.Container(
                 content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
-                height  = 600 
+                height  =   self.dimentions[1]*0.5
             )
 
             lista_groups    =   ft.Container(
@@ -249,7 +250,7 @@ class   info_groups:
                 bgcolor =   self.color[1], 
                 border_radius   =   15, 
                 padding =   ft.padding.all(20),
-                height  = 4000 
+                height  =   self.dimentions[1]*2
             )
 
         return  lista_groups
@@ -316,7 +317,7 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=280
+                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 
@@ -527,7 +528,7 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=280
+                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 
@@ -614,7 +615,7 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=280
+                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 

@@ -11,10 +11,11 @@ import  os
 ######################################################################
 class   info_versus:
 
-    def __init__(self, color, font, direct_groups, direct_img):
+    def __init__(self, color, font, dimentions, direct_groups, direct_img):
         self.page   =   None
         self.color  =   color
         self.font   =   font
+        self.dimentions  =   dimentions
         self.direct_img =   direct_img
         self.direct_groups  =   direct_groups
 
@@ -292,7 +293,7 @@ class   info_versus:
                 scroll=ft.ScrollMode.HIDDEN,
                 spacing=10,
             ), 
-            height=800
+            height=self.dimentions[0]
         )
 
         ###------------------------main_container--------------------------###
@@ -312,7 +313,7 @@ class   info_versus:
     def main_menu(self, menu_navegation):
 
         ###---------------variables_del_baner_superio----------------------###
-        imagen  =   ft.Image(src=str(self.direct_img), width=100)
+        imagen  =   ft.Image(src=str(self.direct_img), width=self.dimentions[0]*0.25)
         
         group_01    =   self.input_group("group")
         group_02    =   self.input_group("group")
@@ -377,7 +378,7 @@ class   info_versus:
         ###----------------------------Super-------------------------------###
         texto    =   ft.Text(
             "Battle 1 vs 1", 
-            size    =   "55", 
+            size    =   self.dimentions[0]*0.13, 
             color   =   self.color[4], 
             weight  =   ft.FontWeight.BOLD,
             italic  =   True,

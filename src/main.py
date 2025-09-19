@@ -35,6 +35,11 @@ direct_list = dest
 ########################################################
 def main_menu(page: ft.Page):
 
+    ###--------------window_dimentions-------------------###
+    w   =   page.width      #   ancho
+    h   =   page.height     #   altura
+    dimentions  =   [float(w), float(h)]
+
     ###------------------fonts---------------------------###
     page.fonts  =   {
         "title":  font_dir[0],
@@ -57,17 +62,18 @@ def main_menu(page: ft.Page):
                 f"{direct_imagen}/nur_black.png",
                 f"{direct_imagen}/nur_blue.png",
                 f"{direct_imagen}/logo_03.png",
+                dimentions,
             )
             gp.page =   page
             gp.init_menu(menu_navegation)
 
         elif    selected_index  ==  1:
-            mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, f"{direct_imagen}/logo.png")
+            mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, dimentions, f"{direct_imagen}/logo.png")
             mn.page =   page
             mn.main_menu(menu_navegation)
 
         elif    selected_index  ==  2:
-            vs  =   versus.info_versus(color, font, direct_list, f"{direct_imagen}/logo_02.png")
+            vs  =   versus.info_versus(color, font, dimentions, direct_list, f"{direct_imagen}/logo_02.png")
             vs.page =   page
             vs.main_menu(menu_navegation)
         
@@ -75,7 +81,7 @@ def main_menu(page: ft.Page):
    
 
     ###-------------import_module_info_menu--------------###
-    mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, f"{direct_imagen}/logo.png")
+    mn  =   menu.info_menu(color[4], color[6], color[8], color[4], font, dimentions, f"{direct_imagen}/logo.png")
     mn.page =   page
     
     ###---------construyendo_menu_de_navegacion----------###
