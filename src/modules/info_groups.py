@@ -301,7 +301,12 @@ class   info_groups:
         )
 
         ###------------------------contenedor_medio------------------------###
-        imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
+        imag_player =   ft.Image(
+            src=str(self.direct_imagen_player_02), 
+            width=self.dimentions[0]*0.42, 
+            height=self.dimentions[1]*0.55,  
+            fit=ft.ImageFit.FILL
+            )
         info_player =   [
             self.input_box("Name"),
             ft.Divider(color=self.color[1]),
@@ -317,14 +322,13 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=self.dimentions[0]*0.5
+                        width=self.dimentions[0]*0.4
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -512,7 +516,12 @@ class   info_groups:
         )
 
         ###------------------------contenedor_medio------------------------###
-        imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
+        imag_player =   ft.Image(
+            src=str(self.direct_imagen_player_02), 
+            width=self.dimentions[0]*0.42, 
+            height=self.dimentions[1]*0.55,  
+            fit=ft.ImageFit.FILL
+            )
         info_player =   [
             self.input_box("Name"),
             ft.Divider(color=self.color[1]),
@@ -528,14 +537,13 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=self.dimentions[0]*0.5
+                        width=self.dimentions[0]*0.4
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -601,7 +609,13 @@ class   info_groups:
         )
 
         ###------------------------contenedor_medio------------------------###
-        imag_player =   ft.Image(src=str(self.direct_imagen_player_02), fit=ft.ImageFit.CONTAIN)
+        imag_player =   ft.Image(
+            src=str(self.direct_imagen_player_02), 
+            width=self.dimentions[0]*0.42, 
+            height=self.dimentions[1]*0.55,  
+            fit=ft.ImageFit.FILL
+            )
+
         info_player =   [
             self.input_box(f"Life:  {tabla_player.loc[0]}"),
             self.input_box(f"Damage:  {tabla_player.loc[1]}"),
@@ -615,14 +629,13 @@ class   info_groups:
                     ft.Container(
                         ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
                         bgcolor=self.color[0], 
-                        height=self.dimentions[1]*0.4
                     ),
                     ft.Container(
                         ft.Column(info_player), 
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=self.dimentions[0]*0.5
+                        width=self.dimentions[0]*0.4
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
