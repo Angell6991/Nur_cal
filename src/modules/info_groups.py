@@ -242,7 +242,7 @@ class   info_groups:
 
             lista_00    =   ft.Container(
                 content =   ft.Column(lista, scroll=ft.ScrollMode.HIDDEN),
-                height  =   self.dimentions[1]*0.5
+                height  =   self.dimentions[1]*0.7
             )
 
             lista_groups    =   ft.Container(
@@ -324,7 +324,7 @@ class   info_groups:
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=190
+                        width=self.dimentions[0]*0.5
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -535,7 +535,7 @@ class   info_groups:
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=190
+                        width=self.dimentions[0]*0.5
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN
@@ -622,7 +622,7 @@ class   info_groups:
                         bgcolor=self.color[1], 
                         padding=ft.padding.all(20), 
                         border_radius=15,
-                        width=190
+                        width=self.dimentions[0]*0.5
                     ) 
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_BETWEEN

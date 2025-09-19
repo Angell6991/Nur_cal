@@ -293,7 +293,7 @@ class   info_versus:
                 scroll=ft.ScrollMode.HIDDEN,
                 spacing=10,
             ), 
-            height=self.dimentions[0]
+            height=self.dimentions[0]*1.9
         )
 
         ###------------------------main_container--------------------------###
