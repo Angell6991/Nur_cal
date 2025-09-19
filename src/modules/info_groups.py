@@ -112,6 +112,44 @@ class   info_groups:
         )
         return self.page.open(dlg_modal)
 
+    ###--------------------------window_player-------------------------###
+    def window_player(self):
+
+        dlg_modal = ft.AlertDialog(
+            bgcolor=self.color[1],
+            modal=True,
+            title=ft.Text(
+                f"Player: {len(self.name_player)}",
+                size    =   "20", 
+                color   =   self.color[4], 
+                weight  =   ft.FontWeight.BOLD,
+                italic  =   True,
+                font_family =   self.font[1] 
+
+            ),
+            content=ft.Column([
+                ft.Text(
+                    str(self.name_player[i]),
+                    size    =   "15", 
+                    color   =   self.color[6], 
+                    font_family =   self.font[1]
+                )
+                for i in range(len(self.name_player))
+            ]),
+            actions=[
+                ft.TextButton(
+                    content=ft.Text(
+                        "back",
+                        size    =   "20", 
+                        color   =   self.color[4], 
+                        font_family =   self.font[1]
+                    ), 
+                    on_click=lambda e: self.page.close(dlg_modal)),
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+        return self.page.open(dlg_modal)
+
     ###-------------------------bar_intro_data-------------------------###
     def input_box(self, intro):
         
@@ -304,7 +342,6 @@ class   info_groups:
         imag_player =   ft.Image(
             src=str(self.direct_imagen_player_02), 
             width=self.dimentions[0]*0.42, 
-            height=self.dimentions[1]*0.55,  
             fit=ft.ImageFit.FILL
             )
         info_player =   [
@@ -338,9 +375,11 @@ class   info_groups:
         ###-----------------------contenedor_inferior----------------------###
         boton_01    =   self.button_icon(save_exit, "Save group and exit", ft.Icons.SAVE)
         boton_02    =   self.button_icon(save_player, "Enter another player", ft.Icons.GROUP_ADD)
+        boton_03    =   self.button_icon(lambda e: self.window_player(),"players to add to the list",ft.Icons.FORMAT_LIST_NUMBERED)
         contenedor_03   =   ft.Container(
             ft.Column(
                 [
+                    ft.Container(ft.Row([boton_03], alignment=ft.MainAxisAlignment.CENTER)), 
                     ft.Container(ft.Row([boton_02], alignment=ft.MainAxisAlignment.CENTER)), 
                     ft.Container(ft.Row([boton_01], alignment=ft.MainAxisAlignment.CENTER))
                 ], 
@@ -519,7 +558,6 @@ class   info_groups:
         imag_player =   ft.Image(
             src=str(self.direct_imagen_player_02), 
             width=self.dimentions[0]*0.42, 
-            height=self.dimentions[1]*0.55,  
             fit=ft.ImageFit.FILL
             )
         info_player =   [
@@ -612,7 +650,6 @@ class   info_groups:
         imag_player =   ft.Image(
             src=str(self.direct_imagen_player_02), 
             width=self.dimentions[0]*0.42, 
-            height=self.dimentions[1]*0.55,  
             fit=ft.ImageFit.FILL
             )
 
