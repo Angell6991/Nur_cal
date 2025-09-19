@@ -39,6 +39,6 @@ pip install pandas numpy flet
 ```
 
 ## Installation
-As the project is in development, links to the .apk will be available soon.
+[APK download link](https://github.com/Angell6991/Nur_cal/releases/download/v0.1.0-beta/nur-cal.apk)
 
 
