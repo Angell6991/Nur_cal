@@ -19,7 +19,7 @@ color   =   [
 font_dir    =   [
     "assets/fonts/NotoSerifDisplay-BoldItalic.ttf",
     "assets/fonts/Ubuntu-R.ttf",
-    "assets/fonts/3270NerdFont-SemiCondensed.ttf"
+    "assets/fonts/nur-font.ttf"
 ]
 
 direct_imagen   =   "storage/data"

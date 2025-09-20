@@ -33,13 +33,13 @@ class   info_menu:
         )
        
         self.git_hut   =   ft.TextButton(
-            content =   ft.Text(" ", size=30, color=color_git, font_family=font[2]),
+            content =   ft.Text("g", size=25, color=color_git, font_family=font[2]),
             url     =   "https://github.com/Angell6991/Nur_cal",
             style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )
 
         self.nur_web   =   ft.TextButton(
-            content =   ft.Text("󰖟 ", size=30, color=color_blog, font_family=font[2]),
+            content =   ft.Text("w", size=25, color=color_blog, font_family=font[2]),
             url     =   "https://stivenreyesdesign.wixsite.com/nur-juego-de-rol",                  
             style   =   ft.ButtonStyle(shape=ft.CircleBorder(), padding=5),
         )
@@ -57,8 +57,8 @@ class   info_menu:
         self.page.horizontal_alignment   =   ft.CrossAxisAlignment.CENTER
         self.page.vertical_alignment     =   ft.MainAxisAlignment.CENTER  
         self.page.floating_action_button =   None
-        # self.page.add(self.name_app, self.imagen, self.texto, self.botones_en_fila, menu_navegation)
-        self.page.add(self.name_app, self.imagen, self.texto, menu_navegation)#, self.botones_en_fila
+        self.page.add(self.name_app, self.imagen, self.texto, self.botones_en_fila, menu_navegation)
+        # self.page.add(self.name_app, self.imagen, self.texto, menu_navegation)#, self.botones_en_fila
         return  self.page.update()
 
 
