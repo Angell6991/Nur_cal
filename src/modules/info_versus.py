@@ -293,7 +293,7 @@ class   info_versus:
                 scroll=ft.ScrollMode.HIDDEN,
                 spacing=10,
             ), 
-            height=self.dimentions[0]*1.9
+            height=self.dimentions[0]*1.8
         )
 
         ###------------------------main_container--------------------------###
@@ -313,7 +313,7 @@ class   info_versus:
     def main_menu(self, menu_navegation):
 
         ###---------------variables_del_baner_superio----------------------###
-        imagen  =   ft.Image(src=str(self.direct_img), width=self.dimentions[0]*0.25)
+        imagen  =   ft.Image(src=str(self.direct_img), width=self.dimentions[0]*0.22)
         
         group_01    =   self.input_group("group")
         group_02    =   self.input_group("group")
@@ -397,7 +397,7 @@ class   info_versus:
         infer   =   ft.Container(ft.Row([boton], alignment=ft.MainAxisAlignment.CENTER))
 
         ###--------------------------Contenedor----------------------------###
-        cont    =   ft.Container(ft.Column([super, center, infer], spacing=30))
+        cont    =   ft.Container(ft.Column([super, center, infer], spacing=30, alignment=ft.CrossAxisAlignment.CENTER))
 
         self.page.controls.clear()
         self.page.add(cont, menu_navegation)

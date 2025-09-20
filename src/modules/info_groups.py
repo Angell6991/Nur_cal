@@ -120,7 +120,7 @@ class   info_groups:
             modal=True,
             title=ft.Text(
                 f"Player: {len(self.name_player)}",
-                size    =   "20", 
+                size    =   "22", 
                 color   =   self.color[4], 
                 weight  =   ft.FontWeight.BOLD,
                 italic  =   True,
@@ -130,12 +130,12 @@ class   info_groups:
             content=ft.Column([
                 ft.Text(
                     str(self.name_player[i]),
-                    size    =   "15", 
+                    size    =   "20", 
                     color   =   self.color[6], 
                     font_family =   self.font[1]
                 )
                 for i in range(len(self.name_player))
-            ]),
+            ],),
             actions=[
                 ft.TextButton(
                     content=ft.Text(
@@ -353,11 +353,28 @@ class   info_groups:
             self.input_box("Attack"),
             self.input_box("Dices"),
         ]
+        texto_player    =   ft.Text(
+            f"Added players: {len(self.name_player)}",
+            size    =   18,
+            color   =   self.color[6],
+            font_family =   self.font[1],
+            text_align  =   ft.TextAlign.START,
+        )
+        icon_boton  = ft.IconButton(
+            icon    =   ft.Icons.FORMAT_LIST_NUMBERED,
+            on_click    =   lambda e:  self.window_player(),
+            icon_size   =   22,
+            icon_color  =   self.color[6]       
+        )
+
         contenedor_02   =   ft.Container(
             ft.Row(
                 [
                     ft.Container(
-                        ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
+                        ft.Column([
+                            ft.Row([icon_boton, texto_player], spacing=1, alignment=ft.MainAxisAlignment.CENTER), 
+                            ft.Row([imag_player], alignment=ft.MainAxisAlignment.CENTER), 
+                        ]),
                         bgcolor=self.color[0], 
                     ),
                     ft.Container(
@@ -375,11 +392,9 @@ class   info_groups:
         ###-----------------------contenedor_inferior----------------------###
         boton_01    =   self.button_icon(save_exit, "Save group and exit", ft.Icons.SAVE)
         boton_02    =   self.button_icon(save_player, "Enter another player", ft.Icons.GROUP_ADD)
-        boton_03    =   self.button_icon(lambda e: self.window_player(),"players to add to the list",ft.Icons.FORMAT_LIST_NUMBERED)
         contenedor_03   =   ft.Container(
             ft.Column(
                 [
-                    ft.Container(ft.Row([boton_03], alignment=ft.MainAxisAlignment.CENTER)), 
                     ft.Container(ft.Row([boton_02], alignment=ft.MainAxisAlignment.CENTER)), 
                     ft.Container(ft.Row([boton_01], alignment=ft.MainAxisAlignment.CENTER))
                 ], 
